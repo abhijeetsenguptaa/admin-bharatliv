@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Meta -->
+		<meta name="description" content="Best Bharatliv Admin Dashboards">
+		<meta name="author" content="Bootstrap Gallery" />
+		<link rel="canonical" href="https://www.bootstrap.gallery/">
+		<meta property="og:url" content="https://www.bootstrap.gallery">
+		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+		<meta property="og:description" content="Marketplace for Bharatliv Admin Dashboards">
+		<meta property="og:type" content="Website">
+		<meta property="og:site_name" content="Bootstrap Gallery">
+		<link rel="shortcut icon" href="assets/images/logo.png">
+
+		<!-- Title -->
+		<title>Bharatliv Admin Dashboards</title>
+
+
+		<!-- *************
+			************ Common Css Files *************
+		************ -->
+
+		<!-- Animated css -->
+		<link rel="stylesheet" href="assets/css/animate.css">
+
+		<!-- Bootstrap font icons css -->
+		<link rel="stylesheet" href="assets/fonts/bootstrap/bootstrap-icons.css">
+
+		<!-- Main css -->
+		<link rel="stylesheet" href="assets/css/main.min.css">
+
+
+	</head>
+
+	<body class="login-container">
+
+		<!-- Loading wrapper start -->
+		<!-- <div id="loading-wrapper">
+			<div class="spinner">
+                <div class="line1"></div>
+				<div class="line2"></div>
+				<div class="line3"></div>
+				<div class="line4"></div>
+				<div class="line5"></div>
+				<div class="line6"></div>
+            </div>
+		</div> -->
+		<!-- Loading wrapper end -->
+
+		<!-- Login box start -->
+		<form action="#" autocomplete="off">
+			<div class="login-box">
+				<div class="login-form">
+					<a href="home.html" class="login-logo">
+						<img src="assets/images/logo.png" alt="Vico Admin" />
+					</a>
+					<div class="login-welcome">
+						Welcome back, <br />Please login to your Bharatliv admin account.
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Username</label>
+						<input type="text" class="form-control" id="loginEmail">
+					</div>
+					<div class="mb-3">
+						<div class="d-flex justify-content-between">
+							<label class="form-label">Password</label>
+							<!-- <a href="forgot-password.html" class="btn-link ml-auto">Forgot password?</a> -->
+						</div>
+						<input type="password" class="form-control" id="loginPassword">
+					</div>
+					<div class="login-form-actions">
+						<button id="loginButton" type="submit" class="btn"> <span class="icon"> <i class="bi bi-arrow-right-circle"></i> </span>
+							Login</button>
+					</div>
+					<script>
+						let loginButton = document.getElementById("loginButton");
+
+						loginButton.addEventListener("click", (e)  => {
+							e.preventDefault();
+							
+							let obj = {
+								email : document.getElementById("loginEmail").value,
+								password : document.getElementById("loginPassword").value
+							}
+
+							fetch("/api/admin/login", {
+								method : "POST",
+								headers : {
+									'Content-Type': 'application/json'
+								},
+								body : JSON.stringify(obj)
+							})
+							.then(res => res.json())
+							.then((data) => {
+								if(data.status){
+									sessionStorage.setItem('login-token', JSON.stringify(data.token))
+									alert("Login Successful!");
+									window.location.href = './home.html'
+								}else {
+									alert(data.message);
+								}
+							})
+						})
+					</script>
+					<!-- <div class="login-form-actions">
+						<button type="submit" class="btn"> <img src="assets/images/google.svg" class="login-icon"
+								alt="Login with Google">
+							Login with Google</button>
+						<button type="submit" class="btn"> <img src="assets/images/facebook.svg" class="login-icon"
+								alt="Login with Facebook">
+							Login with Facebook</button>
+					</div> -->
+					<div class="login-form-footer">
+						<div class="additional-link">
+							<!-- Don't have an account? <a href="signup.html"> Signup</a> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- Login box end -->
+
+		<!-- *************
+			************ Required JavaScript Files *************
+		************* -->
+		<!-- Required jQuery first, then Bootstrap Bundle JS -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/modernizr.js"></script>
+		<script src="assets/js/moment.js"></script>
+
+		<!-- *************
+			************ Vendor Js Files *************
+		************* -->
+
+		<!-- Main Js Required -->
+		<script src="assets/js/main.js"></script>
+		<!-- <script src="assets/js/isToken.js"></script> -->
+	</body>
+
+</html>
