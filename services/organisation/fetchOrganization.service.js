@@ -13,7 +13,7 @@ async function FetchOrganizationService(id, status) {
                 };
             }
         } else if (status) {
-            organizationData = await OrganizationModel.findOne({ where: { status: status } });
+            organizationData = await OrganizationModel.findAll({ where: { status: status } });
         } else {
             organizationData = await OrganizationModel.findAll();
         }

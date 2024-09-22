@@ -13,7 +13,7 @@ async function GetLanguageService(id, status) {
                 };
             }
         } else if (status) {
-            languageData = await LanguageModel.findOne({ where: { status: status } });
+            languageData = await LanguageModel.findAll({ where: { status: status } });
         } else {
             languageData = await LanguageModel.findAll();
         }

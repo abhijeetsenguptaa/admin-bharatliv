@@ -14,7 +14,7 @@ async function FetchSpeakerService(id, organizationID, status) {
                 };
             }
         } else if (status) {
-            speakerData = await SpeakersModel.findOne({ where: { status: status }, include: { model: OrganizationModel } });
+            speakerData = await SpeakersModel.findAll({ where: { status: status }, include: { model: OrganizationModel } });
         } else if (organizationID) {
             speakerData = await SpeakersModel.findAll({ where: { organizationID: organizationID }, include: { model: OrganizationModel } });
         } else {
