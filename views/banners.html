@@ -578,7 +578,7 @@
 						<div class="col-sm-12 col-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Organization History</div>
+									<div class="card-title">Banners History</div>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -586,6 +586,8 @@
 											<thead>
 												<tr>
 													<th>Banner Name</th>
+													<th>Type</th>
+													<th>URL</th>
 													<th>Icon</th>
 													<th>Status</th>
 													<!-- <th>Total Speakers</th> -->
@@ -603,6 +605,13 @@
 														let tbodyOrganization =
 															document.getElementById("tbodyOrganization");
 
+															if(data.data.length == 0){
+                                                                let tr = document.createElement("tr");
+                                                                tr.innerHTML = `<p>No Banners Found!</p>`
+
+                                                                tbodyOrganization.append(tr);
+                                                            }
+
 														data.data.forEach((item) => {
 															let tr = document.createElement("tr");
 															tr.innerHTML = `
@@ -610,6 +619,20 @@
 																	<div class="media-box">
 																		<div class="media-box-body">
 																			<div class="text-truncate">${item.title}</div>
+																		</div>
+																	</div>
+																</td>
+																<td>
+																	<div class="media-box">
+																		<div class="media-box-body">
+																			<div class="text-truncate">${item.type}</div>
+																		</div>
+																	</div>
+																</td>
+																<td>
+																	<div class="media-box">
+																		<div class="media-box-body">
+																			<div class="text-truncate">${item.url}</div>
 																		</div>
 																	</div>
 																</td>

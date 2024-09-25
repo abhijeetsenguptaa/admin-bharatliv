@@ -1,6 +1,6 @@
 const BannerModel = require("../../models/banner.model");
 
-async function FetchBannerService(id, status) {
+async function FetchBannerService(id, status, type) {
     try {
         let BannerData;
 
@@ -13,7 +13,9 @@ async function FetchBannerService(id, status) {
                 };
             }
         } else if (status) {
-            BannerData = await BannerModel.findOne({ where: { status: status } });
+            BannerData = await BannerModel.findAll({ where: { status: status } });
+        } else if (type) {
+            BannerData = await BannerModel.findAll({ where: { type: type } });
         } else {
             BannerData = await BannerModel.findAll();
         }

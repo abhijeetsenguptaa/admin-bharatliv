@@ -8,11 +8,20 @@ const BannerModel = connection.define('banners', {
     },
     status: {
         type: DataTypes.BOOLEAN,
-        allowNull: true,
+        allowNull: false,  // Making sure this field is not null
         defaultValue: true
     },
     image: {
         type: DataTypes.STRING,
+        allowNull: true
+    },
+    type: {
+        type: DataTypes.ENUM('advertisement', 'header'),  // Correct ENUM usage from DataTypes
+        allowNull: false,  // Ensuring that type should not be null
+        defaultValue: 'header'
+    },
+    url: {
+        type: DataTypes.TEXT,
         allowNull: true
     }
 }, {

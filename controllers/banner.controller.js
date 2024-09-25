@@ -46,14 +46,14 @@ const upload = multer({
 
 async function UploadBannerController(req, res) {
     try {
-        const { title } = req.body;
+        const { title, type, url } = req.body;
 
         let image;
         if (req.file) {
             image = req.file.location;
         }
 
-        const createBanner = await PostBannerServices(title, image);
+        const createBanner = await PostBannerServices(title, image, type, url);
 
         return res.status(createBanner.status ? 200 : 404).json({
             status: createBanner.status,
