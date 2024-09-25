@@ -17,6 +17,7 @@ const speakerRoutes = require('./routers/speakers.routes');
 const languageRoute = require('./routers/language.routes');
 const adminRoutes = require('./routers/admin.routes');
 const bannerRoutes = require('./routers/banner.routes');
+const reelsRoutes = require('./routers/reels.routes');
 
 
 
@@ -46,6 +47,7 @@ app.use('/api/organizations', organizationRoute);
 app.use('/api/speakers', speakerRoutes);
 app.use('/api/languages', languageRoute);
 app.use('/api/banners', bannerRoutes);
+app.use('/api/reels', reelsRoutes);
 
 
 // Synchronize the database connection and start the server
