@@ -153,8 +153,8 @@ async function EditSpeakerController(req, res) {
 
                 // Delete the image from S3 storage
                 await s3.deleteObject({ Bucket: BUCKET_NAME, Key: 'speakers/' + imageKey }).promise();
-                image = req.file.location;
             }
+            image = req.file.location;
         }
 
         if (organizationID) {
