@@ -8,6 +8,7 @@ const FetchSpeakerService = require('../services/speakers/fetchSpeakers.service'
 const StatusChangeService = require('../services/speakers/statusChanger.service');
 const DeleteSpeakerService = require('../services/speakers/deleteSpeakers.service');
 const SpeakersModel = require('../models/speakers.model');
+const EditSpeakerService = require('../services/speakers/editSpeakers.service');
 
 aws.config.update({
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
@@ -135,4 +136,54 @@ async function DeleteSpeakerController(req, res) {
     }
 }
 
-module.exports = { upload, UploadSpeakersController, GetSpeakersController, StatusChangeController, DeleteSpeakerController };
+
+async function EditSpeakerController(req, res) {
+    try {
+        const id = req.params.id;
+        const speaker = await SpeakersModel.findByPk(id);
+        const { organizationID, title, status } = req.body;
+
+        let image = speaker.image;
+
+        if (req.file) {
+            if (image) {
+                // Extract the key from the image URL
+                const imageUrlParts = speaker.image.split('/');
+                const imageKey = imageUrlParts[imageUrlParts.length - 1];
+
+                // Delete the image from S3 storage
+                await s3.deleteObject({ Bucket: BUCKET_NAME, Key: 'speakers/' + imageKey }).promise();
+                image = req.file.location;
+            }
+        }
+
+        if (organizationID) {
+            speaker.organizationID = organizationID;
+        }
+
+        if (title) {
+            speaker.title = title;
+        }
+
+        if (status) {
+            speaker.status = status;
+        }
+
+        await speaker.save();
+
+        return res.status(200).json({
+            status: true,
+            message: 'Speaker has been Updated successfully!'
+        })
+
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            status: false,
+            message: 'Internal Server Error',
+        });
+    }
+}
+
+module.exports = { upload, UploadSpeakersController, GetSpeakersController, StatusChangeController, DeleteSpeakerController, EditSpeakerController };
