@@ -219,33 +219,33 @@
 							</div>
 						</li>
 						<li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="bi bi-people"></i>
-                                <span class="menu-text">Customers</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="customers.html">Our Customers</a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </li>
+							<a href="#">
+								<i class="bi bi-people"></i>
+								<span class="menu-text">Customers</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									<li>
+										<a href="customers.html">Our Customers</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
 						<li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="bi bi-people"></i>
-                                <span class="menu-text">Reels</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="reels.html">Customer Reels</a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </li>
+							<a href="#">
+								<i class="bi bi-people"></i>
+								<span class="menu-text">Reels</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									<li>
+										<a href="reels.html">Customer Reels</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
 						<!-- <li class="sidebar-dropdown">
 							<a href="#">
 								<i class="bi bi-gem"></i>
@@ -585,58 +585,69 @@
 							height: 100%;
 							overflow: auto;
 							background-color: rgba(0, 0, 0, 0.5);
-							animation: slideIn 0.3s forwards; /* Animation */
+							animation: slideIn 0.3s forwards;
+							/* Animation */
 						}
-				
+
 						@keyframes slideIn {
 							from {
 								transform: translateY(100%);
 							}
+
 							to {
 								transform: translateY(0);
 							}
 						}
-				
+
 						.modal-content {
 							background-color: #fefefe;
 							margin: 15% auto;
 							padding: 20px;
-							border-radius: 10px; /* Rounded corners */
-							box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+							border-radius: 10px;
+							/* Rounded corners */
+							box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+							/* Subtle shadow */
 							width: 30%;
-							transition: transform 0.3s ease; /* Smooth transition */
+							transition: transform 0.3s ease;
+							/* Smooth transition */
 						}
-				
+
 						.close {
 							color: #aaa;
 							float: right;
 							font-size: 28px;
 							font-weight: bold;
 						}
-				
+
 						.close:hover,
 						.close:focus {
 							color: black;
 							text-decoration: none;
 							cursor: pointer;
 						}
-				
+
 						/* Image Preview Styles */
 						.image-preview {
 							margin: 10px 0;
 							display: flex;
 							align-items: center;
 							justify-content: center;
-							border: 2px dashed #007bff; /* Dashed border */
-							border-radius: 10px; /* Rounded corners */
+							border: 2px dashed #007bff;
+							/* Dashed border */
+							border-radius: 10px;
+							/* Rounded corners */
 							padding: 20px;
-							background-color: #f9f9f9; /* Light background */
+							background-color: #f9f9f9;
+							/* Light background */
 						}
-				
+
 						.image-preview img {
-							max-width: 100%; /* Responsive */
-							max-height: 200px; /* Set max height */
-							border-radius: 10px; /* Rounded corners */
+							max-width: 100%;
+							/* Responsive */
+							max-height: 200px;
+							/* Set max height */
+							border-radius: 10px;
+							/* Rounded corners */
 						}
 					</style>
 					<div class="modal-content">
@@ -651,29 +662,29 @@
 							<label for="title">URL:</label>
 							<input type="text" id="url" required />
 							<br>
-				
+
 							<label for="image">Image:</label>
 							<input type="file" id="image" accept="image/*" onchange="previewImage(event)" />
-							
+
 							<!-- Image Preview Container -->
 							<div class="image-preview" id="imagePreviewContainer">
 								<img id="imagePreview" src="" alt="Image Preview" style="display:none;" />
 							</div>
-							
+
 							<button type="submit" class="btn btn-primary">
 								Save Changes
 							</button>
 						</form>
 					</div>
 				</div>
-				
+
 				<script>
 					// Function to preview image
 					function previewImage(event) {
 						const imagePreviewContainer = document.getElementById("imagePreviewContainer");
 						const imagePreview = document.getElementById("imagePreview");
 						const file = event.target.files[0];
-				
+
 						if (file) {
 							const reader = new FileReader();
 							reader.onload = function (e) {
@@ -687,7 +698,7 @@
 						}
 					}
 				</script>
-				
+
 
 				<div class="content-wrapper">
 					<!-- Row start -->
@@ -715,23 +726,23 @@
 												<!-- Get the data from API's -->
 											</tbody>
 											<script>
-												function fetchOrganization(){
+												function fetchOrganization() {
 													fetch("/api/banners")
-													.then((res) => res.json())
-													.then((data) => {
-														let tbodyOrganization =
-															document.getElementById("tbodyOrganization");
+														.then((res) => res.json())
+														.then((data) => {
+															let tbodyOrganization =
+																document.getElementById("tbodyOrganization");
 
-															if(data.data.length == 0){
-                                                                let tr = document.createElement("tr");
-                                                                tr.innerHTML = `<p>No Banners Found!</p>`
+															if (data.data.length == 0) {
+																let tr = document.createElement("tr");
+																tr.innerHTML = `<p>No Banners Found!</p>`
 
-                                                                tbodyOrganization.append(tr);
-                                                            }
+																tbodyOrganization.append(tr);
+															}
 
-														data.data.forEach((item) => {
-															let tr = document.createElement("tr");
-															tr.innerHTML = `
+															data.data.forEach((item) => {
+																let tr = document.createElement("tr");
+																tr.innerHTML = `
 																<td>
 																	<div class="media-box">
 																		<div class="media-box-body">
@@ -765,7 +776,7 @@
 																	</label>
 																</td>
 																<td>
-    															    <button class="btn btn-edit btn-sm" onclick="openEditModal(${item.id}, '${item.title}')">
+    															    <button class="btn btn-edit btn-sm" onclick="openEditModal(${item.id}, '${item.title}','${item.url}')">
     																	<i class="fas fa-edit"></i>
 																	</button>
     																<button class="btn btn-danger btn-sm" onclick="deleteOrganization(${item.id})"> 
@@ -773,125 +784,126 @@
     																</button>
 																</td>`;
 
-															// Append the row to the table
-															tbodyOrganization.append(tr);
+																// Append the row to the table
+																tbodyOrganization.append(tr);
 
-															// Add event listener for the toggle
-															let toggleSwitch =
-																tr.querySelector(".status-toggle");
-															toggleSwitch.addEventListener(
-																"change",
-																function () {
-																	fetch(
-																		`/api/banners/change-status/${item.id}`,
-																		{
-																			method: "POST",
-																		}
-																	)
-																		.then((res) => res.json())
-																		.then((data) => {
-																			console.log(data);
-																		});
-																	// Handle toggle change logic
-																	let newStatus = this.checked;
-																	console.log(
-																		`Organization ID: ${item.id}, New Status: ${newStatus}`
-																	);
-																	// Optionally, you can send a request to update the status in the backend here
-																}
-															);
+																// Add event listener for the toggle
+																let toggleSwitch =
+																	tr.querySelector(".status-toggle");
+																toggleSwitch.addEventListener(
+																	"change",
+																	function () {
+																		fetch(
+																			`/api/banners/change-status/${item.id}`,
+																			{
+																				method: "POST",
+																			}
+																		)
+																			.then((res) => res.json())
+																			.then((data) => {
+																				console.log(data);
+																			});
+																		// Handle toggle change logic
+																		let newStatus = this.checked;
+																		console.log(
+																			`Organization ID: ${item.id}, New Status: ${newStatus}`
+																		);
+																		// Optionally, you can send a request to update the status in the backend here
+																	}
+																);
+															});
 														});
-													});
 												}
 
 
 												function deleteOrganization(id) {
-                                                    fetch(`/api/banners/delete-banner/${id}`,{
-                                                        method : 'DELETE'
-                                                    })
-                                                    .then(res => res.json())
-                                                    .then((data)=>{
-                                                        if(data.status){
-                                                            let tbodyOrganization = document.getElementById("tbodyOrganization");
+													fetch(`/api/banners/delete-banner/${id}`, {
+														method: 'DELETE'
+													})
+														.then(res => res.json())
+														.then((data) => {
+															if (data.status) {
+																let tbodyOrganization = document.getElementById("tbodyOrganization");
 
-                                                            tbodyOrganization.innerHTML = '';
+																tbodyOrganization.innerHTML = '';
 
-                                                            fetchOrganization();
-                                                        }else {
-                                                            alert("Error faced while deleting categories.")
-                                                        }
-                                                    })
-                                                }
-
-												function openEditModal(id, title) {
-												document.getElementById("editModal").style.display =
-													"block";
-												document.getElementById("speakerId").value = id;
-												document.getElementById("title").value = title;
-
-												fetchOrganizations(); // Populate organizations
-											}
-
-											// Function to close the modal
-											function closeEditModal() {
-												document.getElementById("editModal").style.display =
-													"none";
-											}
-
-											// Handle form submission
-											document
-												.getElementById("editSpeakerForm")
-												.addEventListener("submit", async function (event) {
-													event.preventDefault();
-
-													const id =
-														document.getElementById("speakerId").value;
-													const title =
-														document.getElementById("title").value;
-													const url =
-														document.getElementById("url").value;
-													
-													const image =
-														document.getElementById("image").files[0]; // Get the selected file
-
-													const formData = new FormData();
-													formData.append("title", title);
-													formData.append("url", url);
-													if (image) {
-														formData.append("image", image); // Append the image file
-													}
-
-													// Log the form data contents for debugging
-													formData.forEach((value, key) => {
-														console.log(`${key}:`, value);
-													});
-													try {
-														const response = await fetch(
-															`/api/banners/edit-banner/${id}`,
-															{
-																method: "POST",
-																body: formData, // Send form data with file
+																fetchOrganization();
+															} else {
+																alert("Error faced while deleting categories.")
 															}
-														);
+														})
+												}
 
-														const data = await response.json();
-														if (data.status) {
-															console.log(data);
+												function openEditModal(id, title, url) {
+													document.getElementById("editModal").style.display =
+														"block";
+													document.getElementById("speakerId").value = id;
+													document.getElementById("title").value = title;
+													document.getElementById("url").value = url;
 
-															// Refresh the page or update the UI accordingly
-															window.location.reload();
-														} else {
-															alert(data.message); // Display error message
+													fetchOrganizations(); // Populate organizations
+												}
+
+												// Function to close the modal
+												function closeEditModal() {
+													document.getElementById("editModal").style.display =
+														"none";
+												}
+
+												// Handle form submission
+												document
+													.getElementById("editSpeakerForm")
+													.addEventListener("submit", async function (event) {
+														event.preventDefault();
+
+														const id =
+															document.getElementById("speakerId").value;
+														const title =
+															document.getElementById("title").value;
+														const url =
+															document.getElementById("url").value;
+
+														const image =
+															document.getElementById("image").files[0]; // Get the selected file
+
+														const formData = new FormData();
+														formData.append("title", title);
+														formData.append("url", url);
+														if (image) {
+															formData.append("image", image); // Append the image file
 														}
-													} catch (error) {
-														console.error("Error:", error);
-														alert(
-															"An error occurred while updating the speaker."
-														);
-													}
 
-													closeEditModal(); // Close the modal after submission
-												});
+														// Log the form data contents for debugging
+														formData.forEach((value, key) => {
+															console.log(`${key}:`, value);
+														});
+														try {
+															const response = await fetch(
+																`/api/banners/edit-banner/${id}`,
+																{
+																	method: "POST",
+																	body: formData, // Send form data with file
+																}
+															);
+
+															const data = await response.json();
+															if (data.status) {
+																console.log(data);
+
+																// Refresh the page or update the UI accordingly
+																window.location.reload();
+															} else {
+																alert(data.message); // Display error message
+															}
+														} catch (error) {
+															console.error("Error:", error);
+															alert(
+																"An error occurred while updating the speaker."
+															);
+														}
+
+														closeEditModal(); // Close the modal after submission
+													});
 
 
 
