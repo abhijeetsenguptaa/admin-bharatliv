@@ -5,6 +5,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<!-- Meta -->
 	<meta name="description" content="Best Bharatliv Admin Dashboards" />
@@ -229,7 +230,7 @@
 								</ul>
 							</div>
 						</li>
-						
+
 						<li class="sidebar-dropdown">
 							<a href="#">
 								<i class="bi bi-people"></i>
@@ -570,12 +571,12 @@
 																<label class="form-label">Banner Name
 																	<span class="text-red">*</span></label>
 																<input type="text" class="form-control"
-																	placeholder="Enter Banner Name" id="ImageName" />
+																	placeholder="Enter Banner Name" id="ImageName" required />
 															</div>
 															<div class="mb-3">
 																<label class="form-label">Banner Type
 																	<span class="text-red">*</span></label>
-																<select name="" id="bannerType" class="form-control">
+																<select name="" id="bannerType" class="form-control" required>
 																	<option value="">Enter your Banner Type</option>
 																	<option value="advertisement">Advertisement</option>
 																	<option value="header">Header</option>
@@ -681,6 +682,7 @@
 
 	<!-- Main Js Required -->
 	<script src="assets/js/main.js"></script>
+	
 	<script>
 		document.addEventListener("DOMContentLoaded", () => {
 			const uploadButton = document.getElementById("upload-button");
@@ -690,76 +692,89 @@
 			const categoryNameInput = document.getElementById("ImageName");
 			const bannerTypeInput = document.getElementById("bannerType");
 			const bannerURLInput = document.getElementById("bannerURL");
-			// const categoryDescriptionInput = document.getElementById('ImageDescription');
-
+	
 			uploadButton.addEventListener("click", () => {
 				fileInput.click(); // Trigger the file input click
 			});
-
+	
 			fileInput.addEventListener("change", (event) => {
 				const file = event.target.files[0]; // Get the selected file
 				if (file) {
 					const reader = new FileReader();
-
+	
 					reader.onload = (e) => {
 						imagePreview.src = e.target.result; // Set the image source to the selected file
 						imagePreview.style.display = "block"; // Show the image preview
 						hidePortion.style.display = "none";
 					};
-
+	
 					reader.readAsDataURL(file); // Read the file as a data URL
 				}
 			});
-
+	
 			// Add an event listener to handle form submission
-			document
-				.getElementById("submit-button")
-				.addEventListener("click", async (event) => {
-					event.preventDefault();
-					const categoryName = categoryNameInput.value;
-					const bannerType = bannerTypeInput.value;
-					const bannerURL = bannerURLInput.value;
-					// const categoryDescription = categoryDescriptionInput.value;
-					const file = fileInput.files[0]; // Get the selected file
-
-					// console.log(file);
-					// console.log(file.name);
-					let obj = {
-						title: categoryName,
-						// description: categoryDescription,
-						image: file,
-					};
-
-					// Create a FormData object
-					const formData = new FormData();
-					formData.append('title', categoryName);
-					formData.append('type', bannerType);
-					formData.append('url', bannerURL);
-					// formData.append('description', categoryDescription);
-					formData.append('image', file);
-
-					// Log the form data contents
-					formData.forEach((value, key) => {
-						console.log(`${key}:`, value);
+			document.getElementById("submit-button").addEventListener("click", async (event) => {
+				event.preventDefault();
+	
+				const categoryName = categoryNameInput.value.trim();
+				const bannerType = bannerTypeInput.value.trim();
+				const bannerURL = bannerURLInput.value.trim();
+				const file = fileInput.files[0]; // Get the selected file
+	
+				// Validation for empty fields
+				if (!categoryName || !bannerType || !file) {
+					Swal.fire({
+						title: 'Missing Fields!',
+						text: 'Please ensure that the title, type, and image file are all provided.',
+						icon: 'warning',
+						confirmButtonText: 'OK'
 					});
-					try {
-						fetch("/api/banners/upload-banner", {
-							method: "POST",
-							body: formData,
-						})
-							.then(res => res.json())
-							.then((data) => {
-								if (data.status) {
-									window.location.href = './banners.html'
-								}
-							});
-					} catch (error) {
-						console.error("Error:", error);
-						alert("An error occurred. Please try again later.");
-					}
+					return; // Prevent form submission if any field is missing
+				}
+	
+				// Create a FormData object
+				const formData = new FormData();
+				formData.append('title', categoryName);
+				formData.append('type', bannerType);
+				formData.append('url', bannerURL);
+				formData.append('image', file);
+	
+				// Log the form data contents for debugging
+				formData.forEach((value, key) => {
+					console.log(`${key}:`, value);
 				});
+	
+				try {
+					const response = await fetch("/api/banners/upload-banner", {
+						method: "POST",
+						body: formData,
+					});
+					const data = await response.json();
+					
+					if (data.status) {
+						window.location.href = './banners.html';
+					} else {
+						Swal.fire({
+							title: 'Error!',
+							text: data.message,
+							icon: 'error',
+							confirmButtonText: 'OK'
+						});
+					}
+	
+				} catch (error) {
+					console.error("Error:", error);
+					Swal.fire({
+						title: 'Error!',
+						text: 'An error occurred while uploading the banner. Please try again later.',
+						icon: 'error',
+						confirmButtonText: 'OK'
+					});
+				}
+			});
 		});
 	</script>
+	
 	<script src="assets/js/isToken.js"></script>
 </body>
 
