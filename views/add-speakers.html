@@ -638,9 +638,25 @@
 												</div>
 											</div>
 											<div class="custom-btn-group flex-end">
-												<button type="button" class="btn btn-light">
+												<button type="button" class="btn btn-light" onclick="removeAllFields()">
 													Cancel
 												</button>
+												<script>
+													function removeAllFields() {
+														document.getElementById("ImageName").value = '';
+														document.getElementById("selectOrganization").value = '';
+														// Clear and hide the file input
+														const fileInput = document.getElementById("file-input");
+														fileInput.value = ''; // Reset file input value
+
+														// Hide the image preview
+														const imagePreview = document.getElementById("image-preview");
+														imagePreview.src = ''; // Clear the image source
+														imagePreview.style.display = 'none'; // Hide the preview
+														// Reload the page
+														location.reload();
+													}
+												</script>
 												<a href="" class="btn btn-success" id="submit-button">Add Speaker</a>
 											</div>
 										</div>

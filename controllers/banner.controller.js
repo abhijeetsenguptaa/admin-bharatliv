@@ -136,4 +136,61 @@ async function DeleteBannerController(req, res) {
     }
 }
 
-module.exports = { upload, UploadBannerController, GetBannerController, StatusChangeController, DeleteBannerController };
+async function EditBannersController(req, res) {
+    try {
+        const id = req.params.id;
+        const speaker = await BannerModel.findByPk(id);
+
+        if (!speaker) {
+            return res.status(404).json({
+                status: false,
+                message: 'Speaker not found',
+            });
+        }
+
+        const { title, status, url } = req.body;
+        let image = speaker.image; // Existing image URL
+
+        // If a new image is uploaded, handle the update
+        if (req.file && req.file.location) {
+            // Assuming the new image URL is in req.file.location (for multer-s3)
+
+            if (image) {
+                // Extract the key from the current image URL
+                const imageUrlParts = speaker.image.split('/');
+                const imageKey = imageUrlParts[imageUrlParts.length - 1];
+
+                // Delete the old image from S3 storage
+                await s3.deleteObject({ Bucket: BUCKET_NAME, Key: 'banners/' + imageKey }).promise();
+            }
+
+            // Update image to the new uploaded file's location
+            image = req.file.location;
+        }
+
+        // Update speaker details
+        if (url) speaker.url = url;
+        if (title) speaker.title = title;
+        if (status) speaker.status = status;
+        speaker.image = image; // Save the new image URL (if updated)
+
+        // Save the updated speaker details to the database
+        await speaker.save();
+
+        // Return success response
+        return res.status(200).json({
+            status: true,
+            message: 'Banner has been updated successfully!',
+            speaker
+        });
+
+    } catch (error) {
+        console.error('Error in EditBannerController:', error);
+        return res.status(500).json({
+            status: false,
+            message: 'Internal Server Error',
+        });
+    }
+}
+
+module.exports = { upload, UploadBannerController, GetBannerController, StatusChangeController, DeleteBannerController, EditBannersController };
