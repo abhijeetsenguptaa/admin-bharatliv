@@ -141,44 +141,52 @@ async function EditSpeakerController(req, res) {
     try {
         const id = req.params.id;
         const speaker = await SpeakersModel.findByPk(id);
+
+        if (!speaker) {
+            return res.status(404).json({
+                status: false,
+                message: 'Speaker not found',
+            });
+        }
+
         const { organizationID, title, status } = req.body;
+        let image = speaker.image; // Existing image URL
 
-        let image = speaker.image;
+        // If a new image is uploaded, handle the update
+        if (req.file && req.file.location) { 
+            // Assuming the new image URL is in req.file.location (for multer-s3)
 
-        if (req.file) {
             if (image) {
-                // Extract the key from the image URL
+                // Extract the key from the current image URL
                 const imageUrlParts = speaker.image.split('/');
                 const imageKey = imageUrlParts[imageUrlParts.length - 1];
 
-                // Delete the image from S3 storage
+                // Delete the old image from S3 storage
                 await s3.deleteObject({ Bucket: BUCKET_NAME, Key: 'speakers/' + imageKey }).promise();
             }
+
+            // Update image to the new uploaded file's location
             image = req.file.location;
         }
 
-        if (organizationID) {
-            speaker.organizationID = organizationID;
-        }
+        // Update speaker details
+        if (organizationID) speaker.organizationID = organizationID;
+        if (title) speaker.title = title;
+        if (status) speaker.status = status;
+        speaker.image = image; // Save the new image URL (if updated)
 
-        if (title) {
-            speaker.title = title;
-        }
-
-        if (status) {
-            speaker.status = status;
-        }
-
+        // Save the updated speaker details to the database
         await speaker.save();
 
+        // Return success response
         return res.status(200).json({
             status: true,
-            message: 'Speaker has been Updated successfully!'
-        })
-
+            message: 'Speaker has been updated successfully!',
+            speaker
+        });
 
     } catch (error) {
-        console.error(error);
+        console.error('Error in EditSpeakerController:', error);
         return res.status(500).json({
             status: false,
             message: 'Internal Server Error',
