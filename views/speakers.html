@@ -637,6 +637,18 @@
 								max-height: 200px; /* Set max height */
 								border-radius: 10px; /* Rounded corners */
 							}
+
+							@media screen and (max-width: 600px){
+								.modal-content {
+								background-color: #fefefe;
+								margin: 15% auto;
+								padding: 20px;
+								border-radius: 10px; /* Rounded corners */
+								box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+								width: 80%;
+								transition: transform 0.3s ease; /* Smooth transition */
+							}
+							}
 						</style>
 						<div class="modal-content">
 							<span class="close" onclick="closeEditModal()">&times;</span>
