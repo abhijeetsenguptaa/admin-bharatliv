@@ -662,6 +662,13 @@
 							.then((data) => {
 								if (data.status) {
 									window.location.href = "./categories.html";
+								}else {
+									Swal.fire({
+										title: 'Error!',
+										text: data.message,
+										icon: 'error',
+										confirmButtonText: 'OK'
+									});
 								}
 							});
 					} catch (error) {
