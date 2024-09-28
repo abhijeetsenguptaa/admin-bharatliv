@@ -18,6 +18,7 @@ const languageRoute = require('./routers/language.routes');
 const adminRoutes = require('./routers/admin.routes');
 const bannerRoutes = require('./routers/banner.routes');
 const reelsRoutes = require('./routers/reels.routes');
+const audioCategoryRoutes = require('./routers/audioCategory.routes');
 
 
 
@@ -41,6 +42,7 @@ app.use(express.static(path.join(__dirname, './views'))); // Add the missing par
 app.use('/api/admin', adminRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/audio-categories', audioCategoryRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/document', documentRoutes);
 app.use('/api/organizations', organizationRoute);
