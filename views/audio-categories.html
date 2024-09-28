@@ -668,7 +668,7 @@
 						</style>
 						<div class="modal-content">
 							<span class="close" onclick="closeEditModal()">&times;</span>
-							<h2>Edit Speaker</h2>
+							<h4>Edit Audio Categories</h4>
 							<form id="editSpeakerForm" enctype="multipart/form-data">
 								<input type="hidden" id="speakerId" />
 								<label for="title">Title:</label>
@@ -862,7 +862,7 @@
 													});
 													try {
 														const response = await fetch(
-															`/api/speakers/edit-speakers/${id}`,
+															`/api/audio-categories/edit-audio-categories/${id}`,
 															{
 																method: "POST",
 																body: formData, // Send form data with file
