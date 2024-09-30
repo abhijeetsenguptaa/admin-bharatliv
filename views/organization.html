@@ -251,33 +251,33 @@
 							</div>
 						</li>
 						<li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="bi bi-people"></i>
-                                <span class="menu-text">Customers</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="customers.html">Our Customers</a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </li>
+							<a href="#">
+								<i class="bi bi-people"></i>
+								<span class="menu-text">Customers</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									<li>
+										<a href="customers.html">Our Customers</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
 						<li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="bi bi-people"></i>
-                                <span class="menu-text">Reels</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="reels.html">Customer Reels</a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </li>
+							<a href="#">
+								<i class="bi bi-people"></i>
+								<span class="menu-text">Reels</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									<li>
+										<a href="reels.html">Customer Reels</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
 						<!-- <li class="sidebar-dropdown">
 							<a href="#">
 								<i class="bi bi-gem"></i>
@@ -604,6 +604,129 @@
 			<!-- Content wrapper scroll start -->
 			<div class="content-wrapper-scroll">
 				<!-- Content wrapper start -->
+				<div id="editModal" class="modal">
+					<style>
+						/* Modal Styles */
+						.modal {
+							display: none;
+							position: fixed;
+							z-index: 1000;
+							left: 0;
+							top: 0;
+							width: 100%;
+							height: 100%;
+							overflow: auto;
+							background-color: rgba(0, 0, 0, 0.5);
+							animation: slideIn 0.3s forwards;
+							/* Animation */
+						}
+
+						@keyframes slideIn {
+							from {
+								transform: translateY(100%);
+							}
+
+							to {
+								transform: translateY(0);
+							}
+						}
+
+						.modal-content {
+							background-color: #fefefe;
+							margin: 15% auto;
+							padding: 20px;
+							border-radius: 10px;
+							/* Rounded corners */
+							box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+							/* Subtle shadow */
+							width: 30%;
+							transition: transform 0.3s ease;
+							/* Smooth transition */
+						}
+
+						.close {
+							color: #aaa;
+							float: right;
+							font-size: 28px;
+							font-weight: bold;
+						}
+
+						.close:hover,
+						.close:focus {
+							color: black;
+							text-decoration: none;
+							cursor: pointer;
+						}
+
+						/* Image Preview Styles */
+						.image-preview {
+							margin: 10px 0;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							border: 2px dashed #007bff;
+							/* Dashed border */
+							border-radius: 10px;
+							/* Rounded corners */
+							padding: 20px;
+							background-color: #f9f9f9;
+							/* Light background */
+						}
+
+						.image-preview img {
+							max-width: 100%;
+							/* Responsive */
+							max-height: 200px;
+							/* Set max height */
+							border-radius: 10px;
+							/* Rounded corners */
+						}
+					</style>
+					<div class="modal-content">
+						<span class="close" onclick="closeEditModal()">&times;</span>
+						<h2>Edit Organization</h2>
+						<form id="editSpeakerForm" enctype="multipart/form-data">
+							<input type="hidden" id="speakerId" />
+							<label for="title">Title:</label>
+							<input type="text" id="title" required />
+							<br>
+
+							<label for="image">Image:</label>
+							<input type="file" id="image" accept="image/*" onchange="previewImage(event)" />
+
+							<!-- Image Preview Container -->
+							<div class="image-preview" id="imagePreviewContainer">
+								<img id="imagePreview" src="" alt="Image Preview" style="display:none;" />
+							</div>
+
+							<button type="submit" class="btn btn-primary">
+								Save Changes
+							</button>
+						</form>
+					</div>
+				</div>
+
+				<script>
+					// Function to preview image
+					function previewImage(event) {
+						const imagePreviewContainer = document.getElementById("imagePreviewContainer");
+						const imagePreview = document.getElementById("imagePreview");
+						const file = event.target.files[0];
+
+						if (file) {
+							const reader = new FileReader();
+							reader.onload = function (e) {
+								imagePreview.src = e.target.result;
+								imagePreview.style.display = "block"; // Show image
+							};
+							reader.readAsDataURL(file);
+						} else {
+							imagePreview.src = "";
+							imagePreview.style.display = "none"; // Hide image
+						}
+					}
+				</script>
+
 				<div class="content-wrapper">
 					<!-- Row start -->
 					<div class="row">
@@ -627,105 +750,7 @@
 											<tbody id="tbodyOrganization">
 												<!-- Get the data from API's -->
 											</tbody>
-											<!-- <script>
-												function fetchOrganization(){
-													fetch("/api/organizations")
-													.then((res) => res.json())
-													.then((data) => {
-														let tbodyOrganization =
-															document.getElementById("tbodyOrganization");
-														let totalSpeakers ;
 
-														data.data.forEach((item) => {
-															fetch(`/api/speakers?organizationID=${item.id}`)
-															.then(res => res.json())
-															.then((data)=> {
-																totalSpeakers = data.data.length;
-															})
-															let tr = document.createElement("tr");
-															tr.innerHTML = `
-																<td>
-																	<div class="media-box">
-																		<div class="media-box-body">
-																			<div class="text-truncate">${item.title}</div>
-																		</div>
-																	</div>
-																</td>
-																<td>
-																	<div class="media-box">
-																		<img src=${item.image} class="media-avatar" alt="Organization Icon">	
-																	</div>
-																</td>
-																<td>
-																	<label class="switch">
-																		<input type="checkbox" ${item.status ? "checked" : ""} class="status-toggle">
-																		<span class="slider"></span>
-																	</label>
-																</td>
-																<td>${totalSpeakers}</td>
-																<td>
-    															    
-    																<button class="btn btn-danger btn-sm" onclick="deleteOrganization(${item.id})"> 
-        																<i class="fas fa-trash"></i>
-    																</button>
-																</td>`;
-
-															// Append the row to the table
-															tbodyOrganization.append(tr);
-
-															// Add event listener for the toggle
-															let toggleSwitch =
-																tr.querySelector(".status-toggle");
-															toggleSwitch.addEventListener(
-																"change",
-																function () {
-																	fetch(
-																		`/api/organizations/change-status/${item.id}`,
-																		{
-																			method: "POST",
-																		}
-																	)
-																		.then((res) => res.json())
-																		.then((data) => {
-																			console.log(data);
-																		});
-																	// Handle toggle change logic
-																	let newStatus = this.checked;
-																	console.log(
-																		`Organization ID: ${item.id}, New Status: ${newStatus}`
-																	);
-																	// Optionally, you can send a request to update the status in the backend here
-																}
-															);
-														});
-													});
-												}
-
-
-												function deleteOrganization(id) {
-                                                    fetch(`/api/organizations/delete-organization/${id}`,{
-                                                        method : 'DELETE'
-                                                    })
-                                                    .then(res => res.json())
-                                                    .then((data)=>{
-                                                        if(data.status){
-                                                            let tbodyOrganization = document.getElementById("tbodyOrganization");
-
-                                                            tbodyOrganization.innerHTML = '';
-
-                                                            fetchOrganization();
-                                                        }else {
-                                                            alert("Error faced while deleting categories.")
-                                                        }
-                                                    })
-                                                }
-
-
-												document.addEventListener('DOMContentLoaded', () => {
-													fetchOrganization();
-												})
-											</script> -->
-										
 											<script>
 												function fetchOrganization() {
 													fetch("/api/organizations")
@@ -733,14 +758,14 @@
 														.then((data) => {
 															let tbodyOrganization = document.getElementById("tbodyOrganization");
 															tbodyOrganization.innerHTML = '';  // Clear the existing table content
-											
+
 															data.data.forEach((item) => {
 																// Fetch total speakers based on organization ID
 																fetch(`/api/speakers?organizationID=${item.id}`)
 																	.then((res) => res.json())
 																	.then((speakerData) => {
 																		let totalSpeakers = speakerData.data.length;
-											
+
 																		// Create the row after fetching the total speakers
 																		let tr = document.createElement("tr");
 																		tr.innerHTML = `
@@ -764,25 +789,29 @@
 																			</td>
 																			<td>${totalSpeakers}</td>
 																			<td>
+																				<button class="btn btn-edit btn-sm" onclick="openEditModal(${item.id}, '${item.title
+																			}')">
+																		<i class="fas fa-edit"></i>
+																	</button>
 																				<button class="btn btn-danger btn-sm" onclick="deleteOrganization(${item.id})"> 
 																					<i class="fas fa-trash"></i>
 																				</button>
 																			</td>`;
-											
+
 																		// Append the row to the table after fetching speakers
 																		tbodyOrganization.append(tr);
-											
+
 																		// Add event listener for the toggle
 																		let toggleSwitch = tr.querySelector(".status-toggle");
 																		toggleSwitch.addEventListener("change", function () {
 																			fetch(`/api/organizations/change-status/${item.id}`, {
 																				method: "POST",
 																			})
-																			.then((res) => res.json())
-																			.then((data) => {
-																				console.log(data);
-																			});
-											
+																				.then((res) => res.json())
+																				.then((data) => {
+																					console.log(data);
+																				});
+
 																			let newStatus = this.checked;
 																			console.log(`Organization ID: ${item.id}, New Status: ${newStatus}`);
 																		});
@@ -790,26 +819,95 @@
 															});
 														});
 												}
-											
+
 												function deleteOrganization(id) {
 													fetch(`/api/organizations/delete-organization/${id}`, {
 														method: 'DELETE'
 													})
-													.then(res => res.json())
-													.then((data) => {
-														if (data.status) {
-															fetchOrganization(); // Refetch the organizations list after deleting
-														} else {
-															alert("Error faced while deleting organization.");
-														}
-													});
+														.then(res => res.json())
+														.then((data) => {
+															if (data.status) {
+																fetchOrganization(); // Refetch the organizations list after deleting
+															} else {
+																alert("Error faced while deleting organization.");
+															}
+														});
 												}
-											
+
+												function openEditModal(id, title) {
+												
+													document.getElementById("editModal").style.display =
+														"block";
+													document.getElementById("speakerId").value = id;
+													document.getElementById("title").value = title;
+
+												
+												}
+
+												// Function to close the modal
+												function closeEditModal() {
+													document.getElementById("editModal").style.display =
+														"none";
+												}
+
+												// Handle form submission
+												document
+													.getElementById("editSpeakerForm")
+													.addEventListener("submit", async function (event) {
+														event.preventDefault();
+
+														const id =
+															document.getElementById("speakerId").value;
+														const title =
+															document.getElementById("title").value;
+										
+														const image =
+															document.getElementById("image").files[0]; // Get the selected file
+
+														const formData = new FormData();
+														formData.append("title", title);
+														if (image) {
+															formData.append("image", image); // Append the image file
+														}
+														
+
+														// Log the form data contents for debugging
+														formData.forEach((value, key) => {
+															console.log(`${key}:`, value);
+														});
+														try {
+															const response = await fetch(
+																`/api/organizations/edit-organization/${id}`,
+																{
+																	method: "POST",
+																	body: formData, // Send form data with file
+																}
+															);
+
+															const data = await response.json();
+															if (data.status) {
+																console.log(data);
+
+																// Refresh the page or update the UI accordingly
+																window.location.reload();
+															} else {
+																alert(data.message); // Display error message
+															}
+														} catch (error) {
+															console.error("Error:", error);
+															alert(
+																"An error occurred while updating the speaker."
+															);
+														}
+
+														closeEditModal(); // Close the modal after submission
+													});
+
 												document.addEventListener('DOMContentLoaded', () => {
 													fetchOrganization();  // Call the function when the page loads
 												});
 											</script>
-											
+
 										</table>
 									</div>
 								</div>
