@@ -13,7 +13,7 @@ async function GetCategoryService(id, status) {
                 };
             }
         } else if (status) {
-            categoryData = await CategoryModel.findOne({ where: { status: status } });
+            categoryData = await CategoryModel.findAll({ where: { status: status } });
         } else {
             categoryData = await CategoryModel.findAll();
         }

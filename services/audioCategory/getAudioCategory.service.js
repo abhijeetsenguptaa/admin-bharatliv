@@ -13,7 +13,7 @@ async function GetAudioCategoryService(id, status) {
                 };
             }
         } else if (status) {
-            audioCategoryData = await AudioCategoryModel.findOne({ where: { status: status } });
+            audioCategoryData = await AudioCategoryModel.findAll({ where: { status: status } });
         } else {
             audioCategoryData = await AudioCategoryModel.findAll();
         }

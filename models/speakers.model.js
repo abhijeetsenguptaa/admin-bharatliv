@@ -23,6 +23,11 @@ const SpeakersModel = connection.define('speakers', {
     image: {
         type: DataTypes.STRING,
         allowNull: true
+    },
+    isSingle : {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: true
     }
 }, {
     timestamps: true

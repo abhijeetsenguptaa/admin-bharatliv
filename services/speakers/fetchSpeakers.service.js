@@ -1,7 +1,7 @@
 const OrganizationModel = require("../../models/organization.model");
 const SpeakersModel = require("../../models/speakers.model");
 
-async function FetchSpeakerService(id, organizationID, status) {
+async function FetchSpeakerService(id, organizationID, status, isSingle) {
     try {
         let speakerData;
 
@@ -13,6 +13,8 @@ async function FetchSpeakerService(id, organizationID, status) {
                     message: `Speaker with ID ${id} not found`
                 };
             }
+        } else if (isSingle) {
+            speakerData = await SpeakersModel.findAll({ where: { isSingle: isSingle }, include: { model: OrganizationModel } });
         } else if (status) {
             speakerData = await SpeakersModel.findAll({ where: { status: status }, include: { model: OrganizationModel } });
         } else if (organizationID) {

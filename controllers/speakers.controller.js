@@ -71,9 +71,9 @@ async function UploadSpeakersController(req, res) {
 
 async function GetSpeakersController(req, res) {
     try {
-        const { id, organizationID, status } = req.query;
+        const { id, organizationID, status, isSingle } = req.query;
 
-        const SpeakersData = await FetchSpeakerService(id, organizationID, status);
+        const SpeakersData = await FetchSpeakerService(id, organizationID, status, isSingle);
 
         return res.status(SpeakersData.status ? 200 : 404).json({
             status: SpeakersData.status,
@@ -153,7 +153,7 @@ async function EditSpeakerController(req, res) {
         let image = speaker.image; // Existing image URL
 
         // If a new image is uploaded, handle the update
-        if (req.file && req.file.location) { 
+        if (req.file && req.file.location) {
             // Assuming the new image URL is in req.file.location (for multer-s3)
 
             if (image) {
