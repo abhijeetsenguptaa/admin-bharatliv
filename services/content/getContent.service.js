@@ -58,7 +58,7 @@ async function GetContentService(
     const contentData = await ContentModel.findAll({
       where: whereClause,
       include: [
-        { model: CategoryModel }, // This fetches category for the content
+        { model: CategoryModel }, // Fetch category for the content
         { model: LikeModel },
         { model: OrganizationModel },
         { model: SpeakersModel },
@@ -70,32 +70,27 @@ async function GetContentService(
       ],
     });
 
-    // Extract unique categories from the content data
-    // const uniqueCategories = [];
-    // const categoryMap = {};
+    // Extract unique categories and languages with ids and titles
+    const categories = contentData.map((item) => ({
+      id: item.category.id,
+      title: item.category.title,
+    }));
 
-    // contentData.forEach(content => {
-    //     if (content.category && !categoryMap[content.category.title]) {
-    //         uniqueCategories.push({
-    //             id: content.category.id,
-    //             title: content.category.title
-    //         });
-    //         categoryMap[content.category.title] = true; // Mark as processed
-    //     }
-    // });
-    const categories = contentData.map((item) => item.category.title);
-    const language = contentData.map((item) => item.language.title);
+    const languages = contentData.map((item) => ({
+      id: item.language.id,
+      title: item.language.title,
+    }));
 
-    // Create a set to remove duplicates
-    const uniqueCategories = [...new Set(categories)];
-    const uniqueLanguages = [...new Set(language)];
+    // Create a set to remove duplicates by using ids and titles
+    const uniqueCategories = [...new Map(categories.map((item) => [item.id, item])).values()];
+    const uniqueLanguages = [...new Map(languages.map((item) => [item.id, item])).values()];
 
     return {
       status: true,
       count: contentData.length,
       data: contentData,
-      categories: uniqueCategories, // Return unique categories here
-      languages : uniqueLanguages
+      categories: uniqueCategories, // Return unique categories with id and title
+      languages: uniqueLanguages,   // Return unique languages with id and title
     };
   } catch (error) {
     console.error("Error retrieving Content:", error);
