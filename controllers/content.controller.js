@@ -155,7 +155,9 @@ async function GetContentController(req, res) {
             status: ContentData.status,
             count: ContentData.status ? ContentData.count : 0,
             data: ContentData.status ? ContentData.data : [],
-            message: ContentData.status ? "List of Content" : ContentData.message
+            message: ContentData.status ? "List of Content" : ContentData.message,
+            categories : ContentData.categories,
+            languages  : ContentData.languages
         })
     } catch (error) {
         console.error(error);
