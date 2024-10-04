@@ -143,7 +143,7 @@
 								</ul>
 							</div>
 						</li>
-						<li class="sidebar-dropdown active">
+						<li class="sidebar-dropdown">
 							<a href="#">
 								<i class="bi bi-grid"></i>
 								<span class="menu-text">Categories</span>
@@ -191,7 +191,7 @@
 								</ul>
 							</div>
 						</li>
-						<li class="sidebar-dropdown">
+                        <li class="sidebar-dropdown active">
 							<a href="#">
 								<i class="bi bi-grid"></i>
 								<span class="menu-text">Series Videos</span>
@@ -560,7 +560,7 @@
                         <i class="bi bi-house"></i>
                         <a href="home.html">Home</a>
                     </li>
-                    <li class="breadcrumb-item">Categories</li>
+                    <li class="breadcrumb-item">Videos</li>
                     <!-- <li class="breadcrumb-item breadcrumb-active" aria-current="page">Orders</li> -->
                 </ol>
                 <!-- Breadcrumb end -->
@@ -655,7 +655,7 @@
                         <div class="col-sm-12 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title">Categories History</div>
+                                    <div class="card-title">Videos History</div>
                                 </div>
                                 <div class="card-body">
 
@@ -663,11 +663,11 @@
                                         <table class="table v-middle">
                                             <thead>
                                                 <tr>
-                                                    <th>S No.</th>
-                                                    <th>Category Name</th>
-                                                    <!-- <th>Photo</th> -->
+                                                    <th>Title</th>
+                                                    <th>Thumbnail</th>
+                                                    <th>Video</th>
                                                     <th>Status</th>
-                                                    <!-- <th>Organization Name</th> -->
+                                                    <th>Series Name</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -675,78 +675,89 @@
                                                 <!-- Get the data from API's -->
                                             </tbody>
                                             <script>
-                                                function fetchCategories(){
-                                                    fetch("/api/categories")
+                                                function fetchVideos(){
+                                                    fetch("/api/series-videos/")
                                                     .then(res => res.json())
                                                     .then((data) => {
-                                                        let tbodyOrganization = document.getElementById("tbodyOrganization");
-                                                        let sno = 1;  // Initialize serial number
+                                                        console.log(data);
 
+                                                        let tbodyOrganization = document.getElementById("tbodyOrganization");
+                                                        // let sno = 1;
+                                                        if(data.data.length == 0){
+                                                            tbodyOrganization.innerHTML = `<td>No Videos Found!</td>`
+                                                        }
                                                         data.data.forEach(item => {
+                                                            
                                                             let tr = document.createElement("tr");
                                                             tr.innerHTML = `
-                                                            <td>
-															<div class="media-box">
-																<div class="media-box-body">
-																	<div class="text-truncate">${sno++}</div>
-																</div>
-															</div>
-														    </td>
-															<td>
-															<div class="media-box">
-																<div class="media-box-body">
-																	<div class="text-truncate">${item.title}</div>
-																</div>
-															</div>
-														    </td>
-														<td>
+                                                                <td>
+                                                                    <div class="media-box">
+                                                                        <div class="media-box-body">
+                                                                            <div class="text-truncate">${item.title}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="media-box">
+                                                                        <img src="${item.thumbNail}" class="media-avatar" alt="Thumbnail Image" style="width: 100px; height: auto;">	
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="media-box">
+                                                                        <video class="media-avatar" controls style="width: 150px; height: auto;">
+                                                                            <source src="${item.video}" type="video/mp4">
+                                                                            Your browser does not support the video tag.
+                                                                        </video>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
 																	<label class="switch">
 																		<input type="checkbox" ${item.status ? "checked" : ""} class="status-toggle">
 																		<span class="slider"></span>
 																	</label>
 																</td>
+                                                                <td>${item.series.title}</td>
                                                                 <td>
     															    
-    																<button class="btn btn-danger btn-sm" onclick="deleteCategory(${item.id})">
+    																<button class="btn btn-danger btn-sm" onclick="deleteVideo(${item.id})">
         																<i class="fas fa-trash"></i>
     																</button>
 																</td>
-                                                        `;
+                                                            `;
 
-
-
-                                                            tbodyOrganization.append(tr)
+                                                            tbodyOrganization.append(tr);
 
                                                             // Add event listener for the toggle
-                                                            let toggleSwitch =
-                                                                tr.querySelector(".status-toggle");
-                                                            toggleSwitch.addEventListener(
-                                                                "change",
-                                                                function () {
-                                                                    fetch(
-                                                                        `/api/categories/change-status/${item.id}`,
-                                                                        {
-                                                                            method: "POST",
-                                                                        }
-                                                                    )
-                                                                        .then((res) => res.json())
-                                                                        .then((data) => {
-                                                                            console.log(data);
-                                                                        });
-                                                                    // Handle toggle change logic
-                                                                    let newStatus = this.checked;
-                                                                    console.log(
-                                                                        `Organization ID: ${item.id}, New Status: ${newStatus}`
-                                                                    );
-                                                                    // Optionally, you can send a request to update the status in the backend here
-                                                                }
-                                                            );
-                                                        })
+															let toggleSwitch =
+																tr.querySelector(".status-toggle");
+															toggleSwitch.addEventListener(
+																"change",
+																function () {
+																	fetch(
+																		`/api/content/change-status/${item.id}`,
+																		{
+																			method: "POST",
+																		}
+																	)
+																		.then((res) => res.json())
+																		.then((data) => {
+																			console.log(data);
+																		});
+																	// Handle toggle change logic
+																	let newStatus = this.checked;
+																	console.log(
+																		`Organization ID: ${item.id}, New Status: ${newStatus}`
+																	);
+																	// Optionally, you can send a request to update the status in the backend here
+																}
+															);
+                                                        });
                                                     })
+                                                    .catch(error => console.error('Error fetching data:', error));
                                                 }
-                                                
-                                                function deleteCategory(id) {
-                                                    fetch(`/api/categories/delete-categories/${id}`,{
+
+                                                function deleteVideo(id){
+                                                    fetch(`/api/series-videos/delete-series-video/${id}`,{
                                                         method : 'DELETE'
                                                     })
                                                     .then(res => res.json())
@@ -756,17 +767,19 @@
 
                                                             tbodyOrganization.innerHTML = '';
 
-                                                            fetchCategories();
+                                                            fetchVideos();
                                                         }else {
                                                             alert("Error faced while deleting categories.")
                                                         }
                                                     })
                                                 }
 
-                                                document.addEventListener('DOMContentLoaded', () => {
-                                                    fetchCategories();
-                                                } )
+
+                                                document.addEventListener("DOMContentLoaded", () => {
+                                                    fetchVideos();
+                                                })
                                             </script>
+
                                         </table>
                                     </div>
 
@@ -817,6 +830,7 @@
     <!-- Main Js Required -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/isToken.js"></script>
+
 </body>
 
 </html>

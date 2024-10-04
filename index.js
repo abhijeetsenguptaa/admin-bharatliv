@@ -20,6 +20,8 @@ const bannerRoutes = require('./routers/banner.routes');
 const reelsRoutes = require('./routers/reels.routes');
 const audioCategoryRoutes = require('./routers/audioCategory.routes');
 const audioSubCategoryRoutes = require('./routers/audioSubCategory.routes');
+const seriesRoutes = require('./routers/series.routes');
+const seriesVideoRoutes = require('./routers/seriesVideo.routes');
 
 
 
@@ -43,6 +45,8 @@ app.use(express.static(path.join(__dirname, './views'))); // Add the missing par
 app.use('/api/admin', adminRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/series', seriesRoutes);
+app.use('/api/series-videos', seriesVideoRoutes);
 app.use('/api/audio-categories', audioCategoryRoutes);
 app.use('/api/audio-sub-categories', audioSubCategoryRoutes);
 app.use('/api/content', contentRoutes);
