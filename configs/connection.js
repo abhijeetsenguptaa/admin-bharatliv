@@ -8,3 +8,5 @@ const connection = new sequelize(process.env.DB_DATABASE, process.env.DB_USERNAM
 });
 
 module.exports = connection;
+
+

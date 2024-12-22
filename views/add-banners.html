@@ -635,12 +635,14 @@
 																<label class="form-label">Banner Name
 																	<span class="text-red">*</span></label>
 																<input type="text" class="form-control"
-																	placeholder="Enter Banner Name" id="ImageName" required />
+																	placeholder="Enter Banner Name" id="ImageName"
+																	required />
 															</div>
 															<div class="mb-3">
 																<label class="form-label">Banner Type
 																	<span class="text-red">*</span></label>
-																<select name="" id="bannerType" class="form-control" required>
+																<select name="" id="bannerType" class="form-control"
+																	required>
 																	<option value="">Enter your Banner Type</option>
 																	<option value="advertisement">Advertisement</option>
 																	<option value="header">Header</option>
@@ -651,6 +653,17 @@
 																<span class="text-red">*</span></label>
 															<input type="text" class="form-control"
 																placeholder="Enter Banner URL" id="bannerURL" />
+															<div class="mb-3">
+																<label class="form-label">Banner Device
+																	<span class="text-red">*</span></label>
+																<select name="" id="bannerDevice" class="form-control"
+																	required>
+																	<option value="">Enter your Banner Device</option>
+																	<option value="mobile">Mobile</option>
+																	<option value="tablet">Tablet</option>
+																	<option value="tv">TV</option>
+																</select>
+															</div>
 														</div>
 													</div>
 												</div>
@@ -746,7 +759,7 @@
 
 	<!-- Main Js Required -->
 	<script src="assets/js/main.js"></script>
-	
+
 	<script>
 		document.addEventListener("DOMContentLoaded", () => {
 			const uploadButton = document.getElementById("upload-button");
@@ -756,35 +769,37 @@
 			const categoryNameInput = document.getElementById("ImageName");
 			const bannerTypeInput = document.getElementById("bannerType");
 			const bannerURLInput = document.getElementById("bannerURL");
-	
+			const bannerDeviceInput = document.getElementById("bannerDevice");
+
 			uploadButton.addEventListener("click", () => {
 				fileInput.click(); // Trigger the file input click
 			});
-	
+
 			fileInput.addEventListener("change", (event) => {
 				const file = event.target.files[0]; // Get the selected file
 				if (file) {
 					const reader = new FileReader();
-	
+
 					reader.onload = (e) => {
 						imagePreview.src = e.target.result; // Set the image source to the selected file
 						imagePreview.style.display = "block"; // Show the image preview
 						hidePortion.style.display = "none";
 					};
-	
+
 					reader.readAsDataURL(file); // Read the file as a data URL
 				}
 			});
-	
+
 			// Add an event listener to handle form submission
 			document.getElementById("submit-button").addEventListener("click", async (event) => {
 				event.preventDefault();
-	
+
 				const categoryName = categoryNameInput.value.trim();
 				const bannerType = bannerTypeInput.value.trim();
 				const bannerURL = bannerURLInput.value.trim();
+				const bannerDevice = bannerDeviceInput.value.trim();
 				const file = fileInput.files[0]; // Get the selected file
-	
+
 				// Validation for empty fields
 				if (!categoryName || !bannerType || !file) {
 					Swal.fire({
@@ -795,26 +810,27 @@
 					});
 					return; // Prevent form submission if any field is missing
 				}
-	
+
 				// Create a FormData object
 				const formData = new FormData();
 				formData.append('title', categoryName);
 				formData.append('type', bannerType);
 				formData.append('url', bannerURL);
 				formData.append('image', file);
-	
+				formData.append('device', bannerDevice);
+
 				// Log the form data contents for debugging
 				formData.forEach((value, key) => {
 					console.log(`${key}:`, value);
 				});
-	
+
 				try {
 					const response = await fetch("/api/banners/upload-banner", {
 						method: "POST",
 						body: formData,
 					});
 					const data = await response.json();
-					
+
 					if (data.status) {
 						window.location.href = './banners.html';
 					} else {
@@ -825,7 +841,7 @@
 							confirmButtonText: 'OK'
 						});
 					}
-	
+
 				} catch (error) {
 					console.error("Error:", error);
 					Swal.fire({
@@ -838,7 +854,7 @@
 			});
 		});
 	</script>
-	
+
 	<script src="assets/js/isToken.js"></script>
 </body>
 

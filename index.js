@@ -58,6 +58,7 @@ app.use('/api/banners', bannerRoutes);
 app.use('/api/reels', reelsRoutes);
 
 
+
 // Synchronize the database connection and start the server
 connection.sync().then(() => {
     app.listen(PORT, () => {

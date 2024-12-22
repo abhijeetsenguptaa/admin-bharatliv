@@ -1,6 +1,6 @@
 const BannerModel = require("../../models/banner.model");
 
-async function PostBannerServices(title, image, type, url) {
+async function PostBannerServices(title, image, type, url, device) {
     try {
         // Check if the Banner with the given title already exists
         const isBanner = await BannerModel.findOne({ where: { title: title } });
@@ -14,7 +14,7 @@ async function PostBannerServices(title, image, type, url) {
 
         // Create the new Banner entry
         const BannerCreate = await BannerModel.create({
-            title, image, type, url
+            title, image, type, url, device
         });
 
         // Return success response with the created data
