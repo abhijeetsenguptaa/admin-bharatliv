@@ -33,11 +33,6 @@ const ReelModel = connection.define('reels', {
         type: DataTypes.BOOLEAN,
         allowNull: true,
         defaultValue: false
-    },
-    device: {
-        type: DataTypes.ENUM('mobile', 'tablet', 'tv'),  // Correct ENUM usage from DataTypes
-        allowNull: false,  // Ensuring that type should not be null
-        defaultValue: 'mobile'
     }
 }, {
     timestamps: true

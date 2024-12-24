@@ -1,9 +1,9 @@
 const AudioSubCategoryModel = require("../../models/audioSubCategory.model");
 
 
-async function PostAudioSubCategoryServices(audioCategoryID, title, image, status, device) {
+async function PostAudioSubCategoryServices(audioCategoryID, title, image, status) {
     try {
-        const category = await AudioSubCategoryModel.create({ audioCategoryID, title, image, status, device });
+        const category = await AudioSubCategoryModel.create({ audioCategoryID, title, image, status });
 
         return {
             status: true,

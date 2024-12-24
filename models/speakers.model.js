@@ -28,11 +28,6 @@ const SpeakersModel = connection.define('speakers', {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: true
-    },
-    device: {
-        type: DataTypes.ENUM('mobile', 'tablet', 'tv'),  // Correct ENUM usage from DataTypes
-        allowNull: false,  // Ensuring that type should not be null
-        defaultValue: 'mobile'
     }
 }, {
     timestamps: true

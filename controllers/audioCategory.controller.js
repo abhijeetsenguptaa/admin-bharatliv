@@ -60,14 +60,14 @@ const upload = multer({
 
 async function PostAudioCategoryController(req, res) {
     try {
-        const { title, status, device } = req.body;
+        const { title, status } = req.body;
 
         let image;
         if (req.file) {
             image = req.file.location;
         }
 
-        const audioCategoryUploader = await PostAudioCategoryServices(title, image, status, device);
+        const audioCategoryUploader = await PostAudioCategoryServices(title, image, status);
 
         return res.status(audioCategoryUploader.status ? 200 : 404).json({
             status: audioCategoryUploader.status,
@@ -84,9 +84,9 @@ async function PostAudioCategoryController(req, res) {
 
 async function GetAudioCategoryController(req, res) {
     try {
-        const { id, status, device } = req.query;
+        const { id, status } = req.query;
 
-        const AudioCategoryData = await GetAudioCategoryService(id, status, device);
+        const AudioCategoryData = await GetAudioCategoryService(id, status);
 
         return res.status(AudioCategoryData.status ? 200 : 404).json({
             status: AudioCategoryData.status,

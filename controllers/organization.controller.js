@@ -46,14 +46,14 @@ const upload = multer({
 
 async function UploadOrganizationController(req, res) {
     try {
-        const { title, device } = req.body;
+        const { title } = req.body;
 
         let image;
         if (req.file) {
             image = req.file.location;
         }
 
-        const createOrganization = await PostOrganizationServices(title, image, device);
+        const createOrganization = await PostOrganizationServices(title, image);
 
         return res.status(createOrganization.status ? 200 : 404).json({
             status: createOrganization.status,
@@ -70,9 +70,9 @@ async function UploadOrganizationController(req, res) {
 
 async function GetOrganizationController(req, res) {
     try {
-        const { id, status, device } = req.query;
+        const { id, status } = req.query;
 
-        const OrganizationData = await FetchOrganizationService(id, status, device);
+        const OrganizationData = await FetchOrganizationService(id, status);
 
         return res.status(OrganizationData.status ? 200 : 404).json({
             status: OrganizationData.status,

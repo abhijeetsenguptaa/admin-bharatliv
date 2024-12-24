@@ -1,6 +1,6 @@
 const OrganizationModel = require("../../models/organization.model");
 
-async function FetchOrganizationService(id, status, device) {
+async function FetchOrganizationService(id, status) {
     try {
         let organizationData;
 
@@ -15,9 +15,7 @@ async function FetchOrganizationService(id, status, device) {
         } else if (status) {
             organizationData = await OrganizationModel.findAll({ where: { status: status } });
 
-        } else if (device) {
-            organizationData = await OrganizationModel.findAll({ where: { device: device } });
-        } else {
+        }  else {
             organizationData = await OrganizationModel.findAll();
         }
 

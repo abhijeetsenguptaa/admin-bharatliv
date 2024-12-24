@@ -1,6 +1,6 @@
 const AudioCategoryModel = require("../../models/audioCategory.model");
 
-async function GetAudioCategoryService(id, status, device) {
+async function GetAudioCategoryService(id, status) {
     try {
         let audioCategoryData;
 
@@ -15,8 +15,6 @@ async function GetAudioCategoryService(id, status, device) {
         } else if (status) {
             audioCategoryData = await AudioCategoryModel.findAll({ where: { status: status } });
 
-        } else if (device) {
-            audioCategoryData = await AudioCategoryModel.findAll({ where: { device: device } });
         } else {
             audioCategoryData = await AudioCategoryModel.findAll();
         }

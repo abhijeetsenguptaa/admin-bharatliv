@@ -1,9 +1,9 @@
 const AudioCategoryModel = require("../../models/audioCategory.model");
 
 
-async function PostAudioCategoryServices(title, image, status, device) {
+async function PostAudioCategoryServices(title, image, status) {
     try {
-        const category = await AudioCategoryModel.create({ title, image, status, device });
+        const category = await AudioCategoryModel.create({ title, image, status });
 
         return {
             status: true,

@@ -653,17 +653,7 @@
 																<span class="text-red">*</span></label>
 															<input type="text" class="form-control"
 																placeholder="Enter Banner URL" id="bannerURL" />
-															<div class="mb-3">
-																<label class="form-label">Banner Device
-																	<span class="text-red">*</span></label>
-																<select name="" id="bannerDevice" class="form-control"
-																	required>
-																	<option value="">Enter your Banner Device</option>
-																	<option value="mobile">Mobile</option>
-																	<option value="tablet">Tablet</option>
-																	<option value="tv">TV</option>
-																</select>
-															</div>
+															
 														</div>
 													</div>
 												</div>
@@ -769,7 +759,6 @@
 			const categoryNameInput = document.getElementById("ImageName");
 			const bannerTypeInput = document.getElementById("bannerType");
 			const bannerURLInput = document.getElementById("bannerURL");
-			const bannerDeviceInput = document.getElementById("bannerDevice");
 
 			uploadButton.addEventListener("click", () => {
 				fileInput.click(); // Trigger the file input click
@@ -797,7 +786,6 @@
 				const categoryName = categoryNameInput.value.trim();
 				const bannerType = bannerTypeInput.value.trim();
 				const bannerURL = bannerURLInput.value.trim();
-				const bannerDevice = bannerDeviceInput.value.trim();
 				const file = fileInput.files[0]; // Get the selected file
 
 				// Validation for empty fields
@@ -817,7 +805,6 @@
 				formData.append('type', bannerType);
 				formData.append('url', bannerURL);
 				formData.append('image', file);
-				formData.append('device', bannerDevice);
 
 				// Log the form data contents for debugging
 				formData.forEach((value, key) => {

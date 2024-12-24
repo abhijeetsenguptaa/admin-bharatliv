@@ -647,17 +647,6 @@
 																	</option>
 																</select>
 															</div>
-															<div class="mb-3">
-																<label class="form-label">Device
-																	<span class="text-red">*</span></label>
-																<select name="" id="device" class="form-control"
-																	required>
-																	<option value="">Enter your Device</option>
-																	<option value="mobile">Mobile</option>
-																	<option value="tablet">Tablet</option>
-																	<option value="tv">TV</option>
-																</select>
-															</div>
 														</div>
 														<!-- <div class="col-sm-12 col-12">
                                                                 <div class="mb-0">
@@ -835,7 +824,6 @@
 				.addEventListener("click", async (event) => {
 					event.preventDefault();
 					const categoryName = categoryNameInput.value;
-					const device = deviceInput.value;
 					// const categoryDescription = categoryDescriptionInput.value;
 					const file = fileInput.files[0]; // Get the selected file
 					const organizationID =
@@ -864,7 +852,6 @@
 					formData.append("title", categoryName);
 					formData.append("audioCategoryID", organizationID);
 					formData.append("image", file);
-					formData.append("device", device);
 
 					// Log the form data contents
 					formData.forEach((value, key) => {

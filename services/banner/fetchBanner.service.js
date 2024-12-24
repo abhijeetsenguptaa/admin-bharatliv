@@ -1,13 +1,12 @@
 const BannerModel = require("../../models/banner.model");
 
-async function FetchBannerService(id, status, type, device) {
+async function FetchBannerService(id, status, type) {
     try {
         const query = {};
 
         if (id) query.id = id;
         if (status) query.status = status;
         if (type) query.type = type;
-        if (device) query.device = device;
 
         let BannerData;
         if (id) {

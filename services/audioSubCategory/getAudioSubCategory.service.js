@@ -1,7 +1,7 @@
 const AudioCategoryModel = require("../../models/audioCategory.model");
 const AudioSubCategoryModel = require("../../models/audioSubCategory.model");
 
-async function GetAudioSubCategoryService(id, audioCategoryID, status, device) {
+async function GetAudioSubCategoryService(id, audioCategoryID, status) {
     try {
         const whereConditions = {};
 
@@ -9,7 +9,6 @@ async function GetAudioSubCategoryService(id, audioCategoryID, status, device) {
         if (id) whereConditions.id = id;
         if (audioCategoryID) whereConditions.audioCategoryID = audioCategoryID;
         if (status) whereConditions.status = status;
-        if (device) whereConditions.device = device;
 
         // Query the database with dynamic conditions
         const audioSubCategoryData = await AudioSubCategoryModel.findAll({
