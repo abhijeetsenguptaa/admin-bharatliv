@@ -3,36 +3,38 @@ const AudioSubCategoryModel = require("../../models/audioSubCategory.model");
 
 async function GetAudioSubCategoryService(id, audioCategoryID, status, device) {
     try {
-        let audioSubCategoryData;
+        const whereConditions = {};
 
-        if (id) {
-            audioSubCategoryData = await AudioSubCategoryModel.findOne({ where: { id: id }, include: { model: AudioCategoryModel } });
-            if (!audioSubCategoryData) {
-                return {
-                    status: false,
-                    message: `Audio category with ID ${id} not found`
-                };
-            }
-        } else if (audioCategoryID) {
-            audioSubCategoryData = await AudioSubCategoryModel.findAll({ where: { audioCategoryID: audioCategoryID }, include: { model: AudioCategoryModel } });
-        } else if (status) {
-            audioSubCategoryData = await AudioSubCategoryModel.findAll({ where: { status: status }, include: { model: AudioCategoryModel } });
-        } else if (device) {
-            audioSubCategoryData = await AudioSubCategoryModel.findAll({ where: { device: device }, include: { model: AudioCategoryModel } });
-        } else {
-            audioSubCategoryData = await AudioSubCategoryModel.findAll({ include: { model: AudioCategoryModel } });
+        // Dynamically add conditions
+        if (id) whereConditions.id = id;
+        if (audioCategoryID) whereConditions.audioCategoryID = audioCategoryID;
+        if (status) whereConditions.status = status;
+        if (device) whereConditions.device = device;
+
+        // Query the database with dynamic conditions
+        const audioSubCategoryData = await AudioSubCategoryModel.findAll({
+            where: whereConditions,
+            include: { model: AudioCategoryModel },
+        });
+
+        // Handle no data found
+        if (audioSubCategoryData.length === 0) {
+            return {
+                status: false,
+                message: "No Audio Sub-Category found matching the criteria.",
+            };
         }
 
         return {
             status: true,
             count: audioSubCategoryData.length,
-            data: audioSubCategoryData
+            data: audioSubCategoryData,
         };
     } catch (error) {
         console.error("Error retrieving Category:", error);
         return {
             status: false,
-            message: "Failed to retrieve Audio Sub-Category. Please try again later."
+            message: "Failed to retrieve Audio Sub-Category. Please try again later.",
         };
     }
 }
