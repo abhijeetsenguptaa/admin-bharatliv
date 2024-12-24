@@ -10,6 +10,11 @@ const AudioCategoryModel = connection.define('audioCategories', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    device: {
+        type: DataTypes.ENUM('mobile', 'tablet', 'tv'),  // Correct ENUM usage from DataTypes
+        allowNull: false,  // Ensuring that type should not be null
+        defaultValue: 'mobile'
+    },
     totalAudios: {
         type: DataTypes.INTEGER,
         allowNull: true,

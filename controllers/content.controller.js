@@ -53,7 +53,7 @@ const upload = multer({
 
 async function PostContentController(req, res) {
     try {
-        const { categoryID, organizationID, speakerID, languageID, title, status, rating } = req.body;
+        const { categoryID, organizationID, speakerID, languageID, title, status, rating, device } = req.body;
 
         let thumbNail;
         let video;
@@ -67,7 +67,7 @@ async function PostContentController(req, res) {
             }
         }
 
-        const contentUploader = await PostContentServices(categoryID, organizationID, speakerID, languageID, title, thumbNail, video, status, rating);
+        const contentUploader = await PostContentServices(categoryID, organizationID, speakerID, languageID, title, thumbNail, video, status, rating, device);
 
         return res.status(contentUploader.status ? 200 : 404).json({
             status: contentUploader.status,
@@ -147,17 +147,17 @@ async function EditContentController(req, res) {
 
 async function GetContentController(req, res) {
     try {
-        const { id, status, categoryID, organizationID, speakerID, languageID, userID, highlight, title } = req.query;
+        const { id, status, categoryID, organizationID, speakerID, languageID, userID, highlight, title, device } = req.query;
 
-        const ContentData = await GetContentService(id, status, categoryID, organizationID, speakerID, languageID, userID, highlight, title);
+        const ContentData = await GetContentService(id, status, categoryID, organizationID, speakerID, languageID, userID, highlight, title, device);
 
         return res.status(ContentData.status ? 200 : 404).json({
             status: ContentData.status,
             count: ContentData.status ? ContentData.count : 0,
             data: ContentData.status ? ContentData.data : [],
             message: ContentData.status ? "List of Content" : ContentData.message,
-            categories : ContentData.categories,
-            languages  : ContentData.languages
+            categories: ContentData.categories,
+            languages: ContentData.languages
         })
     } catch (error) {
         console.error(error);

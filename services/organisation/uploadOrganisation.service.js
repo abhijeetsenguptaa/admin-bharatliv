@@ -1,6 +1,6 @@
 const OrganizationModel = require("../../models/organization.model");
 
-async function PostOrganizationServices(title, image) {
+async function PostOrganizationServices(title, image, device) {
     try {
 
         // Check if the organization with the given title already exists
@@ -15,7 +15,7 @@ async function PostOrganizationServices(title, image) {
 
         // Create the new organization entry
         const organizationCreate = await OrganizationModel.create({
-            title, image
+            title, image, device
         });
 
         // Return success response with the created data

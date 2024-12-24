@@ -38,6 +38,11 @@ const SeriesVideoModel = connection.define('seriesVideos', {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0
+    },
+    device: {
+        type: DataTypes.ENUM('mobile', 'tablet', 'tv'),  // Correct ENUM usage from DataTypes
+        allowNull: false,  // Ensuring that type should not be null
+        defaultValue: 'mobile'
     }
 }, {
     timestamps: true

@@ -16,7 +16,8 @@ async function GetContentService(
   speakerID,
   languageID,
   highlight,
-  title
+  title,
+  device
 ) {
   try {
     let whereClause = {};
@@ -27,6 +28,9 @@ async function GetContentService(
 
     if (status) {
       whereClause.status = status;
+    }
+    if (device) {
+      whereClause.device = device;
     }
 
     if (categoryID) {

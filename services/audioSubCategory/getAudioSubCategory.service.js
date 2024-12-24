@@ -1,7 +1,7 @@
 const AudioCategoryModel = require("../../models/audioCategory.model");
 const AudioSubCategoryModel = require("../../models/audioSubCategory.model");
 
-async function GetAudioSubCategoryService(id, audioCategoryID, status) {
+async function GetAudioSubCategoryService(id, audioCategoryID, status, device) {
     try {
         let audioSubCategoryData;
 
@@ -17,6 +17,8 @@ async function GetAudioSubCategoryService(id, audioCategoryID, status) {
             audioSubCategoryData = await AudioSubCategoryModel.findAll({ where: { audioCategoryID: audioCategoryID }, include: { model: AudioCategoryModel } });
         } else if (status) {
             audioSubCategoryData = await AudioSubCategoryModel.findAll({ where: { status: status }, include: { model: AudioCategoryModel } });
+        } else if (device) {
+            audioSubCategoryData = await AudioSubCategoryModel.findAll({ where: { device: device }, include: { model: AudioCategoryModel } });
         } else {
             audioSubCategoryData = await AudioSubCategoryModel.findAll({ include: { model: AudioCategoryModel } });
         }

@@ -42,6 +42,11 @@ const SeriesModel = connection.define('series', {
             key: 'id',
         }
     },
+    device: {
+        type: DataTypes.ENUM('mobile', 'tablet', 'tv'),  // Correct ENUM usage from DataTypes
+        allowNull: false,  // Ensuring that type should not be null
+        defaultValue: 'mobile'
+    }
 }, {
     timestamps: true
 })
