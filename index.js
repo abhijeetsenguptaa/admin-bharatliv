@@ -23,6 +23,7 @@ const audioSubCategoryRoutes = require('./routers/audioSubCategory.routes');
 const seriesRoutes = require('./routers/series.routes');
 const seriesVideoRoutes = require('./routers/seriesVideo.routes');
 const audioRoutes = require('./routers/audio.routes');
+const urlRoutes = require('./routers/url.routes');
 
 
 
@@ -58,6 +59,7 @@ app.use('/api/speakers', speakerRoutes);
 app.use('/api/languages', languageRoute);
 app.use('/api/banners', bannerRoutes);
 app.use('/api/reels', reelsRoutes);
+app.use('/api/url', urlRoutes);
 
 
 
