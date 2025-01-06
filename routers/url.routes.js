@@ -3,7 +3,7 @@ const { UploadUrlController, FetchUrlController } = require('../controllers/url.
 
 const urlRoutes = express.Router();
 
-urlRoutes.post('/post-url', UploadUrlController);
+urlRoutes.post('/upload-url', UploadUrlController);
 urlRoutes.get('/get-url', FetchUrlController);
 
 

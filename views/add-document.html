@@ -16,9 +16,7 @@
     <meta property="og:type" content="Website" />
     <meta property="og:site_name" content="Bootstrap Gallery" />
     <link rel="shortcut icon" href="assets/images/logo.png" />
-    <link rel="stylesheet" href="./assets/css/toggle.css" />
-    <!-- Font Awesome CDN link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
     <!-- Title -->
     <title>Bharatliv Admin Dashboards</title>
 
@@ -291,10 +289,11 @@
                                     <li>
                                         <a href="customers.html">Our Customers</a>
                                     </li>
+
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar-dropdown active">
+                        <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="bi bi-people"></i>
                                 <span class="menu-text">Reels</span>
@@ -308,7 +307,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar-dropdown">
+                        <li class="sidebar-dropdown active">
                             <a href="#">
                                 <i class="bi bi-gem"></i>
                                 <span class="menu-text">Documents</span>
@@ -323,6 +322,7 @@
                                     </li>
                                 </ul>
                             </div>
+                        </li>
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#">
@@ -568,8 +568,8 @@
                         <i class="bi bi-house"></i>
                         <a href="home.html">Home</a>
                     </li>
-                    <li class="breadcrumb-item">Reels</li>
-                    <!-- <li class="breadcrumb-item breadcrumb-active" aria-current="page">Orders</li> -->
+                    <li class="breadcrumb-item">Speakers</li>
+                    <!-- <li class="breadcrumb-item breadcrumb-active" aria-current="page">Upload Organizations</li> -->
                 </ol>
                 <!-- Breadcrumb end -->
 
@@ -579,50 +579,28 @@
                     <div class="search-container">
                         <!-- Search input group start -->
                         <!-- <div class="input-group">
-								<input type="text" class="form-control" placeholder="Search anything">
-								<button class="btn" type="button">
-									<i class="bi bi-search"></i>
-								</button>
-							</div> -->
+                            <input type="text" class="form-control" placeholder="Search anything" />
+                            <button class="btn" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div> -->
                         <!-- Search input group end -->
                     </div>
                     <!-- Search container end -->
 
                     <!-- Leads start -->
                     <!-- <a href="orders.html" class="leads d-none d-xl-flex">
-							<div class="lead-details">You have <span class="count"> 21 </span> new leads </div>
-							<span class="lead-icon"><i
-									class="bi bi-bell-fill animate__animated animate__swing animate__infinite infinite"></i><b
-									class="dot animate__animated animate__heartBeat animate__infinite"></b></span>
-						</a> -->
+                        <div class="lead-details">
+                            You have <span class="count"> 21 </span> new leads
+                        </div>
+                        <span class="lead-icon"><i
+                                class="bi bi-bell-fill animate__animated animate__swing animate__infinite infinite"></i><b
+                                class="dot animate__animated animate__heartBeat animate__infinite"></b></span>
+                    </a> -->
                     <!-- Leads end -->
 
                     <!-- Header actions start -->
                     <ul class="header-actions">
-                        <!-- <li class="dropdown d-none d-md-block">
-								<a href="#" id="countries" data-toggle="dropdown" aria-haspopup="true">
-									<img src="assets/images/flags/1x1/br.svg" class="flag-img" alt="Admin Panels" />
-								</a>
-								<div class="dropdown-menu dropdown-menu-end mini" aria-labelledby="countries">
-									<div class="country-container">
-										<a href="home.html">
-											<img src="assets/images/flags/1x1/us.svg" alt="Clean Admin Dashboards" />
-										</a>
-										<a href="home.html">
-											<img src="assets/images/flags/1x1/in.svg" alt="Google Dashboards" />
-										</a>
-										<a href="home.html">
-											<img src="assets/images/flags/1x1/gb.svg" alt="AI Admin Dashboards" />
-										</a>
-										<a href="home.html">
-											<img src="assets/images/flags/1x1/tr.svg" alt="Modern Dashboards" />
-										</a>
-										<a href="home.html">
-											<img src="assets/images/flags/1x1/ca.svg" alt="Best Admin Dashboards" />
-										</a>
-									</div>
-								</div>
-							</li> -->
                         <li class="dropdown">
                             <a href="#" id="userSettings" class="user-settings" data-toggle="dropdown"
                                 aria-haspopup="true">
@@ -656,161 +634,125 @@
                         <div class="col-sm-12 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title">Reels History</div>
+                                    <div class="card-title">Speakers Information</div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table v-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th>Title</th>
-                                                    <th>Thumbnail</th>
-                                                    <th>Video</th>
-                                                    <th>Approval</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tbodyOrganization">
-                                                <!-- Get the data from API's -->
-                                            </tbody>
-                                            <script>
-                                                function fetchVideos() {
-                                                    fetch("/api/reels/get-reel")
-                                                        .then((res) => res.json())
-                                                        .then((data) => {
+                                    <div class="row">
+                                        <div class="col-sm-6 col-12">
+                                            <div class="card-border">
+                                                <div class="card-border-title">
+                                                    General Information
+                                                </div>
+                                                <div class="card-border-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-12">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Document Title
+                                                                    <span class="text-red">*</span></label>
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Enter Document Title" id="ImageName" />
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="col-sm-12 col-12">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Speakers Organization
+                                                                    <span class="text-red">*</span></label>
+                                                                <select name="organization" id="selectOrganization"
+                                                                    class="form-control">
+                                                                    <option value="">
+                                                                        Choose your Organization
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div> -->
+                                                        <!-- <div class="col-sm-12 col-12">
+                                                                <div class="mb-0">
+                                                                    <label class="form-label">Image Description <span
+                                                                            class="text-red">*</span></label>
+                                                                    <textarea rows="4" class="form-control"
+                                                                        placeholder="Enter Image Description"
+                                                                        id="ImageDescription"></textarea>
+                                                                </div>
+                                                            </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-12">
+                                            <div class="card-border">
+                                                <div class="card-border-title">File</div>
+                                                <div class="card-border-body">
+                                                    <!-- <div id="dropzone" class="dropzone-dark">
+                                                            <form action="" class="dropzone needsclick dz-clickable"
+                                                                id="demo-upload">
+    
+                                                                <div class="dz-message needsclick">
+                                                                    <button type="file" class="dz-button">Click to
+                                                                        upload.</button><br>
+                                                                    <span class="note needsclick">(This is just a view
+                                                                        panel. Selected image will be
+                                                                        <strong>displayed</strong> here.)</span>
+                                                                </div>
+    
+                                                            </form>
+                                                        </div> -->
+                                                    <div id="dropzone" class="dropzone-dark">
+                                                        <form class="dropzone needsclick dz-clickable" id="demo-upload">
+                                                            <div class="dz-message needsclick" id="hidePortion">
+                                                                <button type="button" class="dz-button"
+                                                                    id="upload-button">
+                                                                    Click to upload the PDF.</button><br />
+                                                                <span class="note needsclick"></span>
+                                                            </div>
+                                                            <input type="file" id="file-input" accept="application/pdf"
+                                                                style="display: none" />
 
+                                                            <!-- Image preview -->
+                                                            <img id="image-preview" style="
+                                    display: none;
+                                    max-width: 100%;
+                                    margin-top: 10px;
+                                  " />
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="custom-btn-group flex-end">
+                                                <button type="button" class="btn btn-light" onclick="removeAllFields()">
+                                                    Cancel
+                                                </button>
+                                                <script>
+                                                    function removeAllFields() {
+                                                        document.getElementById("ImageName").value = '';
+                                                        document.getElementById("selectOrganization").value = '';
+                                                        // Clear and hide the file input
+                                                        const fileInput = document.getElementById("file-input");
+                                                        fileInput.value = ''; // Reset file input value
 
-                                                            let tbodyOrganization =
-                                                                document.getElementById("tbodyOrganization");
-                                                            // let sno = 1;
-
-                                                            if (data.data.length == 0) {
-                                                                let tr = document.createElement("tr");
-                                                                tr.innerHTML = `<p>No Reels Found!</p>`
-
-                                                                tbodyOrganization.append(tr);
-                                                            }
-                                                            data.data.forEach((item) => {
-                                                                let tr = document.createElement("tr");
-                                                                tr.innerHTML = `
-                                                                <td>
-                                                                    <div class="media-box">
-                                                                        <div class="media-box-body">
-                                                                            <div class="text-truncate">${item.title
-                                                                    }</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="media-box">
-                                                                        <img src="${item.thumbNail
-                                                                    }" class="media-avatar" alt="Thumbnail Image" style="width: 100px; height: auto;">	
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="media-box">
-                                                                        <video class="media-avatar" controls style="width: 150px; height: auto;">
-                                                                            <source src="${item.video
-                                                                    }" type="video/mp4">
-                                                                            Your browser does not support the video tag.
-                                                                        </video>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-																	<label class="switch">
-																		<input type="checkbox" ${item.hasApprovedByAdmin ? "checked" : ""} class="status-toggle">
-																		<span class="slider"></span>
-																	</label>
-																</td>
-                                                                <td>
-    															    
-    																<button class="btn btn-danger btn-sm" onclick="deleteVideo(${item.id})">
-        																<i class="fas fa-trash"></i>
-    																</button>
-																</td>
-                                                            `;
-
-                                                                tbodyOrganization.append(tr);
-
-                                                                // Add event listener for the toggle
-                                                                let toggleSwitch =
-                                                                    tr.querySelector(".status-toggle");
-                                                                toggleSwitch.addEventListener(
-                                                                    "change",
-                                                                    function () {
-                                                                        fetch(
-                                                                            `/api/reels/change-approval/${item.id}`,
-                                                                            {
-                                                                                method: "POST",
-                                                                                headers: {
-                                                                                    'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('login-token'))}`
-                                                                                }
-                                                                            },
-
-                                                                        )
-                                                                            .then((res) => res.json())
-                                                                            .then((data) => {
-                                                                                console.log(data);
-                                                                            });
-                                                                        // Handle toggle change logic
-                                                                        let newStatus = this.checked;
-                                                                        console.log(
-                                                                            `Organization ID: ${item.id}, New Status: ${newStatus}`
-                                                                        );
-                                                                        // Optionally, you can send a request to update the status in the backend here
-                                                                    }
-                                                                );
-                                                            });
-                                                        })
-                                                        .catch((error) =>
-                                                            console.error("Error fetching data:", error)
-                                                        );
-                                                }
-
-                                                function deleteVideo(id) {
-                                                    fetch(`/api/reels/delete-reel/${id}`, {
-                                                        method: "DELETE",
-                                                    })
-                                                        .then((res) => res.json())
-                                                        .then((data) => {
-                                                            if (data.status) {
-                                                                let tbodyOrganization =
-                                                                    document.getElementById(
-                                                                        "tbodyOrganization"
-                                                                    );
-
-                                                                tbodyOrganization.innerHTML = "";
-
-                                                                fetchVideos();
-                                                            } else {
-                                                                alert(
-                                                                    "Error faced while deleting categories."
-                                                                );
-                                                            }
-                                                        });
-                                                }
-
-                                                document.addEventListener("DOMContentLoaded", () => {
-                                                    fetchVideos();
-                                                });
-                                            </script>
-                                        </table>
+                                                        // Hide the image preview
+                                                        const imagePreview = document.getElementById("image-preview");
+                                                        imagePreview.src = ''; // Clear the image source
+                                                        imagePreview.style.display = 'none'; // Hide the preview
+                                                        // Reload the page
+                                                        location.reload();
+                                                    }
+                                                </script>
+                                                <a href="" class="btn btn-success" id="submit-button">Add Document</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Row end -->
                     </div>
-                    <!-- Row end -->
+                    <!-- Content wrapper end -->
                 </div>
-                <!-- Content wrapper end -->
-
-                <!-- App Footer start -->
-                <div class="app-footer">
-                    <span></span>
-                </div>
-                <!-- App footer end -->
+                <!-- Content wrapper scroll end -->
             </div>
-            <!-- Content wrapper scroll end -->
+            <!-- *************
+                    ************ Main container end *************
+                ************* -->
         </div>
         <!-- *************
 				************ Main container end *************
@@ -837,6 +779,95 @@
 
     <!-- Main Js Required -->
     <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const uploadButton = document.getElementById("upload-button");
+            const fileInput = document.getElementById("file-input");
+            const imagePreview = document.getElementById("image-preview");
+            const hidePortion = document.getElementById("hidePortion");
+            const categoryNameInput = document.getElementById("ImageName");
+            // const categoryDescriptionInput = document.getElementById('ImageDescription');
+
+            uploadButton.addEventListener("click", () => {
+                fileInput.click(); // Trigger the file input click
+            });
+
+            fileInput.addEventListener("change", (event) => {
+                const file = event.target.files[0]; // Get the selected file
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        imagePreview.src = e.target.result; // Set the image source to the selected file
+                        imagePreview.style.display = "block"; // Show the image preview
+                        hidePortion.style.display = "none";
+                    };
+
+                    reader.readAsDataURL(file); // Read the file as a data URL
+                }
+            });
+
+            // Add an event listener to handle form submission
+            document
+                .getElementById("submit-button")
+                .addEventListener("click", async (event) => {
+                    event.preventDefault();
+                    const categoryName = categoryNameInput.value;
+                    // const categoryDescription = categoryDescriptionInput.value;
+                    const file = fileInput.files[0]; // Get the selected file
+
+                    // Validation for empty fields
+                    if (!categoryName || !file) {
+                        Swal.fire({
+                            title: 'Missing Fields!',
+                            text: 'Please ensure that the title, organization, and image file are all provided.',
+                            icon: 'warning',
+                            confirmButtonText: 'OK'
+                        });
+                        return; // Prevent form submission if any field is missing
+                    }
+                    // console.log(file);
+                    // console.log(file.name);
+                    let obj = {
+                        title: categoryName,
+                        file: file,
+                    };
+
+                    // Create a FormData object
+                    const formData = new FormData();
+                    formData.append("title", categoryName);
+                    formData.append("file", file);
+
+                    // Log the form data contents
+                    formData.forEach((value, key) => {
+                        console.log(`${key}:`, value);
+                    });
+                    try {
+                        fetch("/api/document/post-document", {
+                            method: "POST",
+                            body: formData,
+                        })
+                            .then((res) => res.json())
+                            .then((data) => {
+                                if (data.status) {
+                                    window.location.href = './document.html'
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: data.message,
+                                        icon: 'error',
+                                        confirmButtonText: 'OK'
+                                    });
+                                }
+                            });
+                    } catch (error) {
+                        console.error("Error:", error);
+                        alert("An error occurred. Please try again later.");
+                    }
+                });
+        });
+    </script>
     <script src="assets/js/isToken.js"></script>
 </body>
 

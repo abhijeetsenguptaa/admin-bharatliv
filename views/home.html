@@ -286,49 +286,65 @@
 							</div>
 						</li>
 						<li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="bi bi-people"></i>
-                                <span class="menu-text">Customers</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="customers.html">Our Customers</a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </li>
-						<li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="bi bi-people"></i>
-                                <span class="menu-text">Reels</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="reels.html">Customer Reels</a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </li>
-						<!-- <li class="sidebar-dropdown">
 							<a href="#">
-								<i class="bi bi-gem"></i>
-								<span class="menu-text">Widgets</span>
+								<i class="bi bi-people"></i>
+								<span class="menu-text">Customers</span>
 							</a>
 							<div class="sidebar-submenu">
 								<ul>
 									<li>
-										<a href="widgets.html">Widgets</a>
+										<a href="customers.html">Our Customers</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
+						<li class="sidebar-dropdown">
+							<a href="#">
+								<i class="bi bi-people"></i>
+								<span class="menu-text">Reels</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									<li>
+										<a href="reels.html">Customer Reels</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
+						<li class="sidebar-dropdown">
+							<a href="#">
+								<i class="bi bi-gem"></i>
+								<span class="menu-text">Documents</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									<li>
+										<a href="add-document.html">Upload Document</a>
 									</li>
 									<li>
-										<a href="graph-widgets.html">Graph Widgets</a>
+										<a href="document.html">View Document</a>
 									</li>
 								</ul>
 							</div>
-						</li> -->
+						</li>
+						<li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="bi bi-gem"></i>
+                                <span class="menu-text">URL</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="add-url.html">Upload URL</a>
+                                    </li>
+                                    <li>
+                                        <a href="url.html">View URL</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 						<!-- <li class="sidebar-dropdown">
 							<a href="#">
 								<i class="bi bi-collection"></i>
@@ -627,7 +643,7 @@
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userSettings">
 								<div class="header-profile-actions">
 									<!-- <a href="profile.html">Profile</a> -->
-									 <!-- <a href="account-settings.html">Settings</a> -->
+									<!-- <a href="account-settings.html">Settings</a> -->
 									<a id="logoutButton">Logout</a>
 								</div>
 							</div>
@@ -703,8 +719,8 @@
 							<div class="card">
 								<div class="card-body"> -->
 
-									<!-- Row start -->
-									<!-- <div class="row">
+					<!-- Row start -->
+					<!-- <div class="row">
 										<div class="col-xxl-3 col-sm-4 col-12">
 											<div class="reports-summary">
 												<div class="reports-summary-block">
@@ -755,13 +771,13 @@
 											</div>
 										</div>
 									</div> -->
-									<!-- Row end -->
+					<!-- Row end -->
 
-								<!-- </div>
+					<!-- </div>
 							</div>
 
 						</div> -->
-						<!-- <div class="col-xxl-3  col-sm-12 col-12">
+					<!-- <div class="col-xxl-3  col-sm-12 col-12">
 
 							<div class="card">
 								<div class="card-header">
@@ -777,11 +793,11 @@
 							</div>
 
 						</div> -->
-					</div>
-					<!-- Row end -->
+				</div>
+				<!-- Row end -->
 
-					<!-- Row start -->
-					<!-- <div class="row">
+				<!-- Row start -->
+				<!-- <div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -901,10 +917,10 @@
 							</div>
 						</div>
 					</div> -->
-					<!-- Row end -->
+				<!-- Row end -->
 
-					<!-- Row start -->
-					<!-- <div class="row">
+				<!-- Row start -->
+				<!-- <div class="row">
 						<div class="col-sm-6 col-12">
 							<div class="card">
 								<div class="card-header">
@@ -1151,22 +1167,22 @@
 							</div>
 						</div>
 					</div> -->
-					<!-- Row end -->
-
-				</div>
-				<!-- Content wrapper end -->
-
-				<!-- App Footer start -->
-				<div class="app-footer">
-					<span> admin 2024</span>
-				</div>
-				<!-- App footer end -->
+				<!-- Row end -->
 
 			</div>
-			<!-- Content wrapper scroll end -->
+			<!-- Content wrapper end -->
+
+			<!-- App Footer start -->
+			<div class="app-footer">
+				<span> admin 2024</span>
+			</div>
+			<!-- App footer end -->
 
 		</div>
-		<!-- *************
+		<!-- Content wrapper scroll end -->
+
+	</div>
+	<!-- *************
 				************ Main container end *************
 			************* -->
 
@@ -1203,31 +1219,31 @@
 		let organizationCount = document.getElementById("organizationCount");
 		let speakerCount = document.getElementById("speakerCount");
 		let videoCount = document.getElementById("videoCount");
-		let userCount= document.getElementById("userCount");
+		let userCount = document.getElementById("userCount");
 
 		fetch("/api/organizations")
-		.then(res => res.json())
-		.then((data)=>{
-			organizationCount.innerText = data.data.length;
-		})
+			.then(res => res.json())
+			.then((data) => {
+				organizationCount.innerText = data.data.length;
+			})
 
 		fetch("/api/content/get-content")
-		.then(res => res.json())
-		.then((data)=>{
-			videoCount.innerText = data.data.length;
-		})
+			.then(res => res.json())
+			.then((data) => {
+				videoCount.innerText = data.data.length;
+			})
 
 		fetch("/api/speakers")
-		.then(res => res.json())
-		.then((data)=>{
-			speakerCount.innerText = data.data.length;
-		})
+			.then(res => res.json())
+			.then((data) => {
+				speakerCount.innerText = data.data.length;
+			})
 
 		fetch("/api/users")
-		.then(res => res.json())
-		.then((data)=>{
-			userCount.innerText = data.data.length;
-		})
+			.then(res => res.json())
+			.then((data) => {
+				userCount.innerText = data.data.length;
+			})
 	</script>
 </body>
 

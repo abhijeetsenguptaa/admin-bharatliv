@@ -307,22 +307,38 @@
 								</ul>
 							</div>
 						</li>
-						<!-- <li class="sidebar-dropdown">
+						<li class="sidebar-dropdown">
 							<a href="#">
 								<i class="bi bi-gem"></i>
-								<span class="menu-text">Widgets</span>
+								<span class="menu-text">Documents</span>
 							</a>
 							<div class="sidebar-submenu">
 								<ul>
 									<li>
-										<a href="widgets.html">Widgets</a>
+										<a href="add-document.html">Upload Document</a>
 									</li>
 									<li>
-										<a href="graph-widgets.html">Graph Widgets</a>
+										<a href="document.html">View Document</a>
 									</li>
 								</ul>
 							</div>
-						</li> -->
+						</li>
+						<li class="sidebar-dropdown">
+							<a href="#">
+								<i class="bi bi-gem"></i>
+								<span class="menu-text">URL</span>
+							</a>
+							<div class="sidebar-submenu">
+								<ul>
+									<li>
+										<a href="add-url.html">Upload URL</a>
+									</li>
+									<li>
+										<a href="url.html">View URL</a>
+									</li>
+								</ul>
+							</div>
+						</li>
 						<!-- <li class="sidebar-dropdown">
 							<a href="#">
 								<i class="bi bi-collection"></i>
@@ -633,10 +649,11 @@
 																<label class="form-label">Audio Category Name
 																	<span class="text-red">*</span></label>
 																<input type="text" class="form-control"
-																	placeholder="Enter Auido Category Name" id="ImageName" />
+																	placeholder="Enter Auido Category Name"
+																	id="ImageName" />
 															</div>
 														</div>
-														
+
 														<!-- <div class="col-sm-12 col-12">
                                                                 <div class="mb-0">
                                                                     <label class="form-label">Image Description <span
@@ -710,7 +727,8 @@
 														location.reload();
 													}
 												</script>
-												<a href="" class="btn btn-success" id="submit-button">Add Audio Category</a>
+												<a href="" class="btn btn-success" id="submit-button">Add Audio
+													Category</a>
 											</div>
 										</div>
 									</div>
@@ -754,7 +772,7 @@
 	<script src="assets/js/main.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", () => {
-			
+
 			const uploadButton = document.getElementById("upload-button");
 			const fileInput = document.getElementById("file-input");
 			const imagePreview = document.getElementById("image-preview");
@@ -790,9 +808,9 @@
 					const categoryName = categoryNameInput.value;
 					// const categoryDescription = categoryDescriptionInput.value;
 					const file = fileInput.files[0]; // Get the selected file
-				
+
 					// Validation for empty fields
-					if (!categoryName || !file ) {
+					if (!categoryName || !file) {
 						Swal.fire({
 							title: 'Missing Fields!',
 							text: 'Please ensure that the title, organization, and image file are all provided.',
