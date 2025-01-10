@@ -3,7 +3,7 @@ const connection = require("../configs/connection");
 const UsersModel = require("./users.model");
 const ReelAdminModel = require("./reel-admin.model");
 
-const LikeModel = connection.define('likes', {
+const ReelAdminLikeModel = connection.define('reelAdminLikes', {
     userID: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -22,28 +22,28 @@ const LikeModel = connection.define('likes', {
     },
 })
 
-LikeModel.belongsTo(UsersModel, {
+ReelAdminLikeModel.belongsTo(UsersModel, {
     foreignKey: 'userID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 })
 
-UsersModel.hasMany(LikeModel, {
+UsersModel.hasMany(ReelAdminLikeModel, {
     foreignKey: 'userID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 })
 
-LikeModel.belongsTo(ReelAdminModel, {
+ReelAdminLikeModel.belongsTo(ReelAdminModel, {
     foreignKey: 'adminReelID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 })
 
-ReelAdminModel.hasMany(LikeModel, {
+ReelAdminModel.hasMany(ReelAdminLikeModel, {
     foreignKey: 'adminReelID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 })
 
-module.exports = LikeModel;
+module.exports = ReelAdminLikeModel;
