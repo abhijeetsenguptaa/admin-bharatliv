@@ -8,6 +8,7 @@ const ContentModel = require('../models/content.model');
 const DeleteContentService = require('../services/content/deleteContent.service');
 const HandleContentStatusService = require('../services/content/handleContentStatus.service');
 const UploadReelsAdmin = require('../services/reelsAdmin/uploadReelsAdmin.service');
+const GetReelsAdminService = require('../services/reelsAdmin/fetchReelsAdmin.service');
 
 aws.config.update({
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
@@ -75,7 +76,25 @@ async function PostReelAdminController(req, res) {
     }
 }
 
+async function GetReelsAdminController(req, res) {
+    try {
+        const { id, status, title } = req.query;
 
+        const reelsData = await GetReelsAdminService(id, status, title);
+
+        return res.status(reelsData.status ? 200 : 404).json({
+            status: reelsData.status,
+            count: reelsData.status ? reelsData.count : 0,
+            data: reelsData.status ? reelsData.data : [],
+        })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            status: false,
+            message: error,
+        });
+    }
+}
 
 
 // async function EditContentController(req, res) {
@@ -188,4 +207,4 @@ async function HandleStatusContentController(req, res) {
 }
 
 
-module.exports = { upload, PostReelAdminController, DeleteContentController, HandleStatusContentController };
+module.exports = { upload, PostReelAdminController, GetReelsAdminController, DeleteContentController, HandleStatusContentController };
