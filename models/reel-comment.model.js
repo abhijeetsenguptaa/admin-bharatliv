@@ -3,7 +3,7 @@ const connection = require("../configs/connection");
 const UsersModel = require("./users.model");
 const ReelAdminModel = require("./reel-admin.model");
 
-const ReelCommentModel = connection.define('reelComments', {
+const ReelAdminCommentModel = connection.define('reelAdminComments', {
     userID: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -26,28 +26,28 @@ const ReelCommentModel = connection.define('reelComments', {
     }
 })
 
-ReelCommentModel.belongsTo(UsersModel, {
+ReelAdminCommentModel.belongsTo(UsersModel, {
     foreignKey: 'userID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 })
 
-UsersModel.hasMany(ReelCommentModel, {
+UsersModel.hasMany(ReelAdminCommentModel, {
     foreignKey: 'userID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 })
 
-ReelCommentModel.belongsTo(ReelAdminModel, {
+ReelAdminCommentModel.belongsTo(ReelAdminModel, {
     foreignKey: 'adminReelID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 })
 
-ReelAdminModel.hasMany(ReelCommentModel, {
+ReelAdminModel.hasMany(ReelAdminCommentModel, {
     foreignKey: 'adminReelID',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 })
 
-module.exports = ReelCommentModel;
+module.exports = ReelAdminCommentModel;

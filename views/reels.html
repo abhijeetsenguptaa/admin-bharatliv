@@ -302,7 +302,10 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="reels.html">Customer Reels</a>
+                                        <a href="add-reels.html">Upload Reels</a>
+                                    </li>
+                                    <li>
+                                        <a href="reels.html">View Reels</a>
                                     </li>
 
                                 </ul>
@@ -666,7 +669,7 @@
                                                     <th>Title</th>
                                                     <th>Thumbnail</th>
                                                     <th>Video</th>
-                                                    <th>Approval</th>
+                                                    <!-- <th>Approval</th> -->
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -675,10 +678,10 @@
                                             </tbody>
                                             <script>
                                                 function fetchVideos() {
-                                                    fetch("/api/reels/get-reel")
+                                                    fetch("/api/admin-reels")
                                                         .then((res) => res.json())
                                                         .then((data) => {
-
+                                                            console.log(data.data);
 
                                                             let tbodyOrganization =
                                                                 document.getElementById("tbodyOrganization");
@@ -691,6 +694,8 @@
                                                                 tbodyOrganization.append(tr);
                                                             }
                                                             data.data.forEach((item) => {
+                                                                console.log(item);
+                                                                
                                                                 let tr = document.createElement("tr");
                                                                 tr.innerHTML = `
                                                                 <td>
@@ -716,12 +721,7 @@
                                                                         </video>
                                                                     </div>
                                                                 </td>
-                                                                <td>
-																	<label class="switch">
-																		<input type="checkbox" ${item.hasApprovedByAdmin ? "checked" : ""} class="status-toggle">
-																		<span class="slider"></span>
-																	</label>
-																</td>
+                                                                
                                                                 <td>
     															    
     																<button class="btn btn-danger btn-sm" onclick="deleteVideo(${item.id})">
@@ -733,33 +733,33 @@
                                                                 tbodyOrganization.append(tr);
 
                                                                 // Add event listener for the toggle
-                                                                let toggleSwitch =
-                                                                    tr.querySelector(".status-toggle");
-                                                                toggleSwitch.addEventListener(
-                                                                    "change",
-                                                                    function () {
-                                                                        fetch(
-                                                                            `/api/reels/change-approval/${item.id}`,
-                                                                            {
-                                                                                method: "POST",
-                                                                                headers: {
-                                                                                    'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('login-token'))}`
-                                                                                }
-                                                                            },
+                                                                // let toggleSwitch =
+                                                                //     tr.querySelector(".status-toggle");
+                                                                // toggleSwitch.addEventListener(
+                                                                //     "change",
+                                                                //     function () {
+                                                                //         fetch(
+                                                                //             `/api/reels/change-approval/${item.id}`,
+                                                                //             {
+                                                                //                 method: "POST",
+                                                                //                 headers: {
+                                                                //                     'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('login-token'))}`
+                                                                //                 }
+                                                                //             },
 
-                                                                        )
-                                                                            .then((res) => res.json())
-                                                                            .then((data) => {
-                                                                                console.log(data);
-                                                                            });
-                                                                        // Handle toggle change logic
-                                                                        let newStatus = this.checked;
-                                                                        console.log(
-                                                                            `Organization ID: ${item.id}, New Status: ${newStatus}`
-                                                                        );
-                                                                        // Optionally, you can send a request to update the status in the backend here
-                                                                    }
-                                                                );
+                                                                //         )
+                                                                //             .then((res) => res.json())
+                                                                //             .then((data) => {
+                                                                //                 console.log(data);
+                                                                //             });
+                                                                //         // Handle toggle change logic
+                                                                //         let newStatus = this.checked;
+                                                                //         console.log(
+                                                                //             `Organization ID: ${item.id}, New Status: ${newStatus}`
+                                                                //         );
+                                                                //         // Optionally, you can send a request to update the status in the backend here
+                                                                //     }
+                                                                // );
                                                             });
                                                         })
                                                         .catch((error) =>
@@ -773,6 +773,8 @@
                                                     })
                                                         .then((res) => res.json())
                                                         .then((data) => {
+                                                            
+                                                            
                                                             if (data.status) {
                                                                 let tbodyOrganization =
                                                                     document.getElementById(

@@ -1,6 +1,7 @@
 const { Op } = require("sequelize");
 const ReelAdminModel = require("../../models/reel-admin.model");
 const ReelAdminLikeModel = require("../../models/reel-like.model");
+const ReelAdminCommentModel = require("../../models/reel-comment.model");
 async function GetReelsAdminService(
     id,
     status,
@@ -26,7 +27,7 @@ async function GetReelsAdminService(
 
         const reelsData = await ReelAdminModel.findAll({
             where: whereClause,
-            include: ReelAdminLikeModel
+            include: [ReelAdminLikeModel, ReelAdminCommentModel]
         });
 
         return {
