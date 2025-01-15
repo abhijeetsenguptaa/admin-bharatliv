@@ -9,6 +9,8 @@ const DeleteContentService = require('../services/content/deleteContent.service'
 const HandleContentStatusService = require('../services/content/handleContentStatus.service');
 const UploadReelsAdmin = require('../services/reelsAdmin/uploadReelsAdmin.service');
 const GetReelsAdminService = require('../services/reelsAdmin/fetchReelsAdmin.service');
+const ReelAdminModel = require('../models/reel-admin.model');
+const DeleteReelAdminService = require('../services/reelsAdmin/deleteReelsAdmin.service');
 
 aws.config.update({
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
@@ -160,10 +162,10 @@ async function GetReelsAdminController(req, res) {
 
 
 
-async function DeleteContentController(req, res) {
+async function DeleteReelAdminController(req, res) {
     try {
         const id = req.params.id;
-        const data = await ContentModel.findByPk(id);
+        const data = await ReelAdminModel.findByPk(id);
 
         const thumbNailKey = data.thumbNail.split('/').pop();
         await s3.deleteObject({ Bucket: BUCKET_NAME, Key: 'reels/' + thumbNailKey }).promise();
@@ -171,7 +173,7 @@ async function DeleteContentController(req, res) {
         const videoKey = data.video.split('/').pop();
         await s3.deleteObject({ Bucket: BUCKET_NAME, Key: 'reels/' + videoKey }).promise();
 
-        const deleteVideo = await DeleteContentService(id);
+        const deleteVideo = await DeleteReelAdminService(id);
 
         return res.status(deleteVideo.status ? 200 : 500).json({
             status: deleteVideo.status,
@@ -207,4 +209,4 @@ async function HandleStatusContentController(req, res) {
 }
 
 
-module.exports = { upload, PostReelAdminController, GetReelsAdminController, DeleteContentController, HandleStatusContentController };
+module.exports = { upload, PostReelAdminController, GetReelsAdminController, DeleteReelAdminController, HandleStatusContentController };

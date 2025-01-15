@@ -1,5 +1,5 @@
 const express = require('express');
-const { upload, PostReelAdminController, GetReelsAdminController } = require('../controllers/reel-admin.controller');
+const { upload, PostReelAdminController, GetReelsAdminController, DeleteReelAdminController } = require('../controllers/reel-admin.controller');
 const { authentication } = require('../middleware/authentication.middleware');
 const { authorize } = require('../middleware/authorization.middleware');
 const ReelsAdminLikesController = require('../controllers/reel-likes.controller');
@@ -11,5 +11,6 @@ reelAdminRoutes.post('/post-reel-admin', upload.fields([{ name: 'thumbNail' }, {
 reelAdminRoutes.get('/', GetReelsAdminController);
 reelAdminRoutes.post('/like/:reelsAdminID', authentication, authorize(['customer']), ReelsAdminLikesController);
 reelAdminRoutes.post('/comment/:adminReelID', authentication, authorize(['customer']), ReelsAdminCommentController);
+reelAdminRoutes.delete('/delete-reel-admin/:id', DeleteReelAdminController);
 
 module.exports = reelAdminRoutes;
