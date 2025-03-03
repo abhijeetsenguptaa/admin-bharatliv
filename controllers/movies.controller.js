@@ -6,6 +6,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const PostMoviesService = require('../services/movies/postMovies.service');
 const GetMoviesService = require('../services/movies/getMovies.service');
+const HandleMoviesStatusService = require('../services/movies/handleMoviesStatus.service');
 
 aws.config.update({
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
@@ -101,7 +102,24 @@ async function GetMoviesController(req, res) {
 }
 
 
+async function HandleStatusMoviesController(req, res) {
+    try {
+        const id = req.params.id;
+
+        const handleContent = await HandleMoviesStatusService(id);
+
+        return res.status(handleContent.status ? 200 : 404).json({
+            status: handleContent.status,
+            message: handleContent.message
+        })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            status: false,
+            message: 'Internal Server Error',
+        });
+    }
+}
 
 
-
-module.exports = { upload, PostMoviesController, GetMoviesController };
+module.exports = { upload, PostMoviesController, GetMoviesController, HandleStatusMoviesController };
