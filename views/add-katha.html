@@ -221,7 +221,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar-dropdown active">
+                        <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="bi bi-camera-video"></i>
                                 <span class="menu-text">Videos</span>
@@ -349,22 +349,22 @@
                             </div>
                         </li>
                         <li class="sidebar-dropdown">
-							<a href="#">
-								<i class="bi bi-gem"></i>
-								<span class="menu-text">Movies</span>
-							</a>
-							<div class="sidebar-submenu">
-								<ul>
-									<li>
-										<a href="add-movies.html">Upload Movies</a>
-									</li>
-									<li>
-										<a href="movies.html">View Movies</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="bi bi-gem"></i>
+                                <span class="menu-text">Movies</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="add-movies.html">Upload Movies</a>
+                                    </li>
+                                    <li>
+                                        <a href="movies.html">View Movies</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown active">
 							<a href="#">
 								<i class="bi bi-gem"></i>
 								<span class="menu-text">Katha</span>
@@ -608,7 +608,7 @@
                         <i class="bi bi-house"></i>
                         <a href="home.html">Home</a>
                     </li>
-                    <li class="breadcrumb-item">Videos</li>
+                    <li class="breadcrumb-item">Katha</li>
                     <!-- <li class="breadcrumb-item breadcrumb-active" aria-current="page">Upload Organizations</li> -->
                 </ol>
                 <!-- Breadcrumb end -->
@@ -674,7 +674,7 @@
                         <div class="col-sm-12 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title">Videos Information</div>
+                                    <div class="card-title">Katha Information</div>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -687,35 +687,14 @@
                                                     <div class="row">
                                                         <div class="col-sm-12 col-12">
                                                             <div class="mb-3">
-                                                                <label class="form-label">Videos Name
+                                                                <label class="form-label">Katha Name
                                                                     <span class="text-red">*</span></label>
                                                                 <input type="text" class="form-control"
-                                                                    placeholder="Enter Videos Name" id="ImageName" />
+                                                                    placeholder="Enter Katha Name" id="ImageName" />
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-12 col-12"></div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Category
-                                                                <span class="text-red">*</span></label>
-                                                            <select name="category" id="selectCategory"
-                                                                class="form-control">
-                                                                <option value="">
-                                                                    Choose your Category
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 col-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Organization
-                                                                <span class="text-red">*</span></label>
-                                                            <select name="organization" id="selectOrganization"
-                                                                class="form-control">
-                                                                <option value="">
-                                                                    Choose your Organization
-                                                                </option>
-                                                            </select>
-                                                        </div>
+
                                                     </div>
                                                     <div class="col-sm-12 col-12">
                                                         <div class="mb-3">
@@ -725,18 +704,6 @@
                                                                 class="form-control">
                                                                 <option value="">
                                                                     Choose your Speaker
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 col-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Language
-                                                                <span class="text-red">*</span></label>
-                                                            <select name="language" id="selectLanguage"
-                                                                class="form-control">
-                                                                <option value="">
-                                                                    Choose your Language
                                                                 </option>
                                                             </select>
                                                         </div>
@@ -757,7 +724,7 @@
                                             <div class="card-border">
                                                 <div class="card-border-title">Media</div>
                                                 <div class="card-border-body">
-                                                    <label class="form-label">Videos
+                                                    <label class="form-label">Katha Video
                                                         <span class="text-red">*</span></label>
                                                     <input type="file" accept="video/*" id="videoContent">
                                                     <!-- <div id="dropzone" class="dropzone-dark">
@@ -804,7 +771,7 @@
                                                 <button type="button" class="btn btn-light">
                                                     Cancel
                                                 </button>
-                                                <a href="" class="btn btn-success" id="submit-button">Add Video</a>
+                                                <a href="" class="btn btn-success" id="submit-button">Add Katha</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1165,10 +1132,11 @@
 
                 <script>
                     document.addEventListener("DOMContentLoaded", () => {
-                        const selectOrganization = document.querySelector("#selectOrganization");
                         const selectSpeaker = document.querySelector("#selectSpeaker");
-                        const selectLanguage = document.querySelector("#selectLanguage");
-                        const selectCategory = document.querySelector("#selectCategory");
+                        // const selectOrganization = document.querySelector("#selectOrganization");
+                        // const selectSpeaker = document.querySelector("#selectSpeaker");
+                        // const selectLanguage = document.querySelector("#selectLanguage");
+                        // const selectCategory = document.querySelector("#selectCategory");
                         const uploadButton = document.getElementById("upload-button");
                         const fileInput = document.getElementById("file-input");
                         const imagePreview = document.getElementById("image-preview");
@@ -1183,84 +1151,25 @@
                             alert(message);
                         };
 
-                        // Fetch languages from the API
-                        fetch("/api/languages")
-                            .then((response) => response.json())
-                            .then((data) => {
+
+                        fetch(`/api/speakers`)
+                            .then(res => res.json())
+                            .then(data => {
                                 if (data.status && data.data) {
-                                    const languages = data.data;
-                                    languages.forEach(language => {
+                                    const speakers = data.data;
+                                    speakers.forEach(speaker => {
                                         const option = document.createElement("option");
-                                        option.value = language.id;
-                                        option.textContent = language.title;
-                                        selectLanguage.appendChild(option);
+                                        option.value = speaker.id;
+                                        option.textContent = speaker.title;
+                                        selectSpeaker.appendChild(option);
                                     });
                                 } else {
-                                    console.error("No Language found or data format incorrect");
+                                    console.error("No Speakers found or data format incorrect");
                                 }
                             })
-                            .catch((error) => handleError(error, "Error fetching Languages"));
+                            .catch(error => handleError(error, "Error fetching Speakers"));
 
-                        // Fetch categories from the API
-                        fetch("/api/categories")
-                            .then((response) => response.json())
-                            .then((data) => {
-                                if (data.status && data.data) {
-                                    const category = data.data;
-                                    category.forEach(categories => {
-                                        const option = document.createElement("option");
-                                        option.value = categories.id;
-                                        option.textContent = categories.title;
-                                        selectCategory.appendChild(option);
-                                    });
-                                } else {
-                                    console.error("No Category found or data format incorrect");
-                                }
-                            })
-                            .catch((error) => handleError(error, "Error fetching Categories"));
 
-                        // Fetch organizations from the API
-                        fetch("/api/organizations")
-                            .then((response) => response.json())
-                            .then((data) => {
-                                if (data.status && data.data) {
-                                    const organizations = data.data;
-                                    organizations.forEach(organization => {
-                                        const option = document.createElement("option");
-                                        option.value = organization.id;
-                                        option.textContent = organization.title;
-                                        selectOrganization.appendChild(option);
-                                    });
-                                } else {
-                                    console.error("No organizations found or data format incorrect");
-                                }
-                            })
-                            .catch((error) => handleError(error, "Error fetching Organizations"));
-
-                        // Fetch speakers based on selected organization
-                        if (selectOrganization) {
-                            selectOrganization.addEventListener("change", (e) => {
-                                // Clear previous speaker options
-                                selectSpeaker.innerHTML = `<option value="">Select Speaker</option>`;
-
-                                fetch(`/api/speakers?organizationID=${e.target.value}`)
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        if (data.status && data.data) {
-                                            const speakers = data.data;
-                                            speakers.forEach(speaker => {
-                                                const option = document.createElement("option");
-                                                option.value = speaker.id;
-                                                option.textContent = speaker.title;
-                                                selectSpeaker.appendChild(option);
-                                            });
-                                        } else {
-                                            console.error("No Speakers found or data format incorrect");
-                                        }
-                                    })
-                                    .catch(error => handleError(error, "Error fetching Speakers"));
-                            });
-                        }
 
                         // Trigger file input click
                         if (uploadButton) {
@@ -1292,25 +1201,20 @@
 
                                 const categoryName = categoryNameInput.value;
                                 const file = fileInput.files[0];
-                                const categoryID = selectCategory.value;
-                                const organizationID = selectOrganization.value;
-                                const speakerID = selectSpeaker.value;
-                                const languageID = selectLanguage.value;
                                 const videoFile = video.files[0];
+                                const speakerID = selectSpeaker.value;
+                                
 
-                                if (!categoryName || !organizationID || !file || !speakerID || !languageID || !videoFile) {
+                                if (!categoryName || !file || !videoFile) {
                                     alert("Please fill out all fields and upload a video.");
                                     return;
                                 }
 
                                 const formData = new FormData();
                                 formData.append("title", categoryName);
-                                formData.append("categoryID", categoryID);
-                                formData.append("organizationID", organizationID);
-                                formData.append("speakerID", speakerID);
-                                formData.append("languageID", languageID);
                                 formData.append("thumbNail", file);
                                 formData.append("video", videoFile);
+                                formData.append("speakerID", speakerID);
 
                                 try {
                                     // Show the SweetAlert loader when the upload starts
@@ -1324,7 +1228,7 @@
                                     });
 
                                     // Perform the upload
-                                    const response = await fetch("/api/content/post-content", {
+                                    const response = await fetch("/api/katha/post-katha", {
                                         method: "POST",
                                         body: formData,
                                     });
@@ -1333,7 +1237,7 @@
                                     Swal.close();
 
                                     if (result.status) {
-                                        window.location.href = './videos.html';
+                                        window.location.href = './katha.html';
                                     } else {
                                         Swal.close();
                                         alert("Failed to upload content. Please try again.");

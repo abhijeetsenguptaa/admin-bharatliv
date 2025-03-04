@@ -1,7 +1,8 @@
+const { DataTypes } = require('sequelize');
 const connection = require("../configs/connection");
 const SpeakersModel = require("./speakers.model");
 
-const KathaModel = await connection.define("kathas", {
+const KathaModel = connection.define("kathas", {
     title: {
         type: DataTypes.STRING,
         allowNull: false
@@ -18,11 +19,6 @@ const KathaModel = await connection.define("kathas", {
         type: DataTypes.BOOLEAN,
         allowNull: true,
         defaultValue: true
-    },
-    rating: {
-        type: DataTypes.DECIMAL,
-        allowNull: true,
-        defaultValue: 5.0
     },
     speakerID: {
         type: DataTypes.INTEGER,

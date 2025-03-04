@@ -30,6 +30,7 @@ const AudioModel = require('./models/audio.model');
 const { Op } = require('sequelize');
 const reelAdminRoutes = require('./routers/reel-admin.routes');
 const moviesRouter = require('./routers/movies.routes');
+const kathaRoutes = require('./routers/katha.routes');
 
 
 
@@ -68,6 +69,7 @@ app.use('/api/reels', reelsRoutes);
 app.use('/api/url', urlRoutes);
 app.use('/api/admin-reels', reelAdminRoutes);
 app.use('/api/movies', moviesRouter);
+app.use('/api/katha', kathaRoutes);
 
 app.get('/api/search', async (req, res) => {
     try {

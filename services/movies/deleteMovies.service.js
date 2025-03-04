@@ -1,25 +1,25 @@
-const KathaModel = require('../../models/katha.model');
+const MoviesModel = require('../../models/movies.model');
 const fs = require('fs').promises;
 
-async function DeleteKathaService(id) {
+async function DeleteMoviesService(id) {
     try {
         // Find the Content by ID
-        const kathaToDelete = await KathaModel.findOne({ where: { id: id } });
+        const movieToDelete = await MoviesModel.findOne({ where: { id: id } });
 
         // If the Content doesn't exist, return an error
-        if (!kathaToDelete) {
+        if (!movieToDelete) {
             return {
                 status: false,
-                message: 'Katha not found!'
+                message: 'Movies not found!'
             };
         }
 
         // If the Content exists, delete it
-        await kathaToDelete.destroy();
+        await movieToDelete.destroy();
 
         return {
             status: true,
-            message: 'Katha deleted successfully'
+            message: 'Movies deleted successfully'
         };
     } catch (error) {
         console.log(error.message);
@@ -30,4 +30,4 @@ async function DeleteKathaService(id) {
     }
 }
 
-module.exports = DeleteKathaService;
+module.exports = DeleteMoviesService;

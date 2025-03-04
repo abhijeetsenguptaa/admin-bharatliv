@@ -7,6 +7,8 @@ const multerS3 = require('multer-s3');
 const PostMoviesService = require('../services/movies/postMovies.service');
 const GetMoviesService = require('../services/movies/getMovies.service');
 const HandleMoviesStatusService = require('../services/movies/handleMoviesStatus.service');
+const MoviesModel = require('../models/movies.model');
+const DeleteMoviesService = require('../services/movies/deleteMovies.service');
 
 aws.config.update({
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
@@ -122,4 +124,32 @@ async function HandleStatusMoviesController(req, res) {
 }
 
 
-module.exports = { upload, PostMoviesController, GetMoviesController, HandleStatusMoviesController };
+async function DeleteMoviesController(req, res) {
+    try {
+        const id = req.params.id;
+        const data = await MoviesModel.findByPk(id);
+
+        const thumbNailKey = data.thumbNail.split('/').pop();
+        await s3.deleteObject({ Bucket: BUCKET_NAME, Key: 'movies/' + thumbNailKey }).promise();
+
+        const videoKey = data.video.split('/').pop();
+        await s3.deleteObject({ Bucket: BUCKET_NAME, Key: 'movies/' + videoKey }).promise();
+
+        const deleteVideo = await DeleteMoviesService(id);
+
+        return res.status(deleteVideo.status ? 200 : 500).json({
+            status: deleteVideo.status,
+            message: deleteVideo.message
+        })
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            status: false,
+            message: error
+        });
+    }
+}
+
+
+module.exports = { upload, PostMoviesController, GetMoviesController, HandleStatusMoviesController, DeleteMoviesController };
